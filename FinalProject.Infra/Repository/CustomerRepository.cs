@@ -36,7 +36,7 @@ namespace FinalProject.Infra.Repository
 
             var p = new DynamicParameters(); // pass data to database (stored proc.)
 
-            p.Add("p_RoleId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_CustomerId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Customer>("Customer_Package.GetCustomerById", p, commandType: CommandType.StoredProcedure);
 
