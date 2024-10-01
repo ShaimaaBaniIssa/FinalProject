@@ -25,9 +25,4 @@
 	  <ProjectReference Include="..\FinalProject.Core\FinalProject.Core.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Services\" />
-	  <Folder Include="Repository\" />
-	</ItemGroup>
-
 </Project>

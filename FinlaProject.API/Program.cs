@@ -1,5 +1,8 @@
 using FinalProject.Core.Common;
+using FinalProject.Core.Repository;
+using FinalProject.Core.Services;
 using FinalProject.Infra.Common;
+using FinalProject.Infra.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDbContext, DbContext>();
+builder.Services.AddScoped<ITrainRepository, TrainRepository>();
+builder.Services.AddScoped<ITrainServices, TrainServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
