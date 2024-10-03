@@ -1,8 +1,10 @@
-﻿using FinalProject.Core.Data;
+﻿
 
-namespace FinalProject.Core.Repository
+using FinalProject.Core.Data;
+
+namespace FinalProject.Core.Services
 {
-    public interface IStationRepository
+    public interface IStationService
     {
         List<Station> GetAllStations();
         Station GetStationById(int id);

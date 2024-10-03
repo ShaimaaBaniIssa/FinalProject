@@ -1,8 +1,8 @@
 ﻿using FinalProject.Core.Data;
 
-namespace FinalProject.Core.Repository
+namespace FinalProject.Core.Services
 {
-    public interface ITripRepository
+    public interface ITripService
     {
         List<Trip> GetAllTrips();
         Trip GetTripById(int id);
