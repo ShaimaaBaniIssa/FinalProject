@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /FinlaProject.API/appsettings.json
+/FinlaProject.API/appsettings.Development.json
