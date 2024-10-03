@@ -39,7 +39,7 @@ namespace FinalProject.API.Controllers
             _bankCardService.UpdateBankCard(bankcard);
         }
         [HttpDelete]
-        [Route("DeleteCustomer/{id}")]
+        [Route("DeleteBankCard/{id}")]
         public void DeleteBankCard(int id)
         {
             _bankCardService.DeleteBankCard(id);
