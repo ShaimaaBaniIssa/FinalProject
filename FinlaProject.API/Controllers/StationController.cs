@@ -43,5 +43,20 @@ namespace FinalProject.API.Controllers
         {
             _stationService?.DeleteStation(id); 
         }
+        [Route("UploadImage")]
+        [HttpPost]
+        public Station UploadImage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var fullPath = Path.Combine("Images", fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Station station = new Station();
+            station.Imagepath = fileName;
+            return station;
+        }
     }
 }
