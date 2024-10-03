@@ -61,5 +61,43 @@ namespace FinalProject.Infra.Repository
 
             _dbContext.Connection.Execute("Station_Package.DeleteStation", p, commandType: CommandType.StoredProcedure);
         }
+        public async Task<List<Station>> GetStationsWithTrips()
+        {
+
+            var p = new DynamicParameters();
+            var result = await _dbContext.Connection.QueryAsync<Station, Trip, Station>("Station_Package.GetStationsWithTrips",
+            (Station, trip) =>
+            {
+                Station.Trips.Add(new Trip { 
+                    Tripid = trip.Tripid,
+                    Destlatitude = trip.Destlatitude,
+                    Destlongitude = trip.Destlongitude,
+                    Sunday = trip.Sunday,
+                    Monday = trip.Monday,
+                    Thursday = trip.Thursday,
+                    Wednesday = trip.Wednesday,
+                    Friday = trip.Friday,
+                    Saturday = trip.Saturday,
+                    Tuesday = trip.Tuesday,
+                    Price = trip.Price,
+                    
+                
+                });
+                return Station;
+            },
+            splitOn: "Tripid",
+            commandType: CommandType.StoredProcedure
+
+            );
+            var results = result.GroupBy(p => p.Stationid).Select(g =>
+            {
+                var groupedPost = g.First();
+                groupedPost.Trips = g.Select(p => p.Trips.Single()).ToList();
+                return groupedPost;
+            });
+            return results.ToList();
+
+
+        }
     }
 }

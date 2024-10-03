@@ -44,5 +44,11 @@ namespace FinalProject.API.Controllers
         {
             _tripService.DeleteTrip(id);
         }
+        [HttpGet]
+        [Route("GetTripsWithSchedules")]
+        public Task<List<Trip>> GetTripsWithSchedules()
+        {
+            return _tripService.GetTripsWithSchedules();
+        }
     }
 }

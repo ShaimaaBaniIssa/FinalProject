@@ -31,6 +31,11 @@ namespace FinalProject.Infra.Services
             return _tripRepository.GetTripById(id);
         }
 
+        public Task<List<Trip>> GetTripsWithSchedules()
+        {
+            return _tripRepository.GetTripsWithSchedules();
+        }
+
         public void UpdateTrip(Trip trip)
         {
             _tripRepository.UpdateTrip(trip);

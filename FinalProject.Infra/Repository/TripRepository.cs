@@ -73,5 +73,34 @@ namespace FinalProject.Infra.Repository
 
             _dbContext.Connection.Execute("Trip_Package.DeleteTrip", p, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task<List<Trip>> GetTripsWithSchedules()
+        {
+            var result = await _dbContext.Connection.QueryAsync<Trip, Tripschedule, Trip>("Trip_Package.GetTripsWithSchedules",
+            (Trip, tripSchedule) =>
+            {
+                Trip.Tripschedules.Add(new Tripschedule
+                {
+                    Tripscheduleid = tripSchedule.Tripscheduleid,
+                    Arrivaltime = tripSchedule.Arrivaltime,
+                    Departuretime = tripSchedule.Departuretime,
+                    Trainid = tripSchedule.Trainid
+
+                });
+                return Trip;
+            },
+            splitOn: "Tripscheduleid",
+            commandType: CommandType.StoredProcedure
+
+            );
+            var results = result.GroupBy(p => p.Stationid).Select(g =>
+            {
+                var groupedPost = g.First();
+                groupedPost.Tripschedules = g.Select(p => p.Tripschedules.Single()).ToList();
+                return groupedPost;
+            });
+            return results.ToList();
+
+        }
     }
 }

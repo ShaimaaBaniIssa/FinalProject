@@ -11,5 +11,6 @@ namespace FinalProject.Core.Services
         void CreateStation(Station station);
         void UpdateStation(Station station);
         void DeleteStation(int id);
+        Task<List<Station>> GetStationsWithTrips();
     }
 }

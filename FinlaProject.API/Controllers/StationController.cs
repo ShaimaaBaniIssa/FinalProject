@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Services;
+using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,6 +58,12 @@ namespace FinalProject.API.Controllers
             Station station = new Station();
             station.Imagepath = fileName;
             return station;
+        }
+        [HttpGet]
+        [Route("GetStationsWithTrips")]
+        public Task<List<Station>> GetStationsWithTrips()
+        {
+            return _stationService.GetStationsWithTrips();
         }
     }
 }

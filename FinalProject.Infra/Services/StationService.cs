@@ -31,6 +31,11 @@ namespace FinalProject.Infra.Services
             return _stationRepository.GetStationById(id);
         }
 
+        public Task<List<Station>> GetStationsWithTrips()
+        {
+            return _stationRepository.GetStationsWithTrips();
+        }
+
         public void UpdateStation(Station station)
         {
            _stationRepository.UpdateStation(station);
