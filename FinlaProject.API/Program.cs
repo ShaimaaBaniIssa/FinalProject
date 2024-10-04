@@ -26,6 +26,9 @@ builder.Services.AddScoped<ITestimonialRepository, TestimonialRepository>();
 builder.Services.AddScoped<IStationRepository, StationRepository>();
 builder.Services.AddScoped<ITripRepository, TripRepository>();
 builder.Services.AddScoped<ITripScheduleRepository, TripScheduleRepository>();
+builder.Services.AddScoped<IBankCardRepository, BankCardRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 
 // db services
@@ -39,6 +42,9 @@ builder.Services.AddScoped<ITestimonialServices, TestimonialServices>();
 builder.Services.AddScoped<IStationService, StationService>();
 builder.Services.AddScoped<ITripService, TripService>();
 builder.Services.AddScoped<ITripScheduleService, TripScheduleService>();
+builder.Services.AddScoped<IBankCardService, BankCardService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 
 // services
