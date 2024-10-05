@@ -44,7 +44,7 @@ builder.Services.AddScoped<ITripService, TripService>();
 builder.Services.AddScoped<ITripScheduleService, TripScheduleService>();
 builder.Services.AddScoped<IBankCardService, BankCardService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
-builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IReservationService,ReservationService>();
 
 
 // services
