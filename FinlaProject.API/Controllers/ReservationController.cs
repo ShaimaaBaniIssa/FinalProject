@@ -46,6 +46,18 @@ namespace FinalProject.API.Controllers
         {
             _reservationService.DeleteReservation(id);
         }
+        [HttpGet]
+        [Route("GetReservationsWithCustomer")]
+        public async Task<List<Reservation>> GetReservationsWithCustomer()
+        {
+            return await _reservationService.GetReservationsWithCustomer();
+        }
+        [HttpGet]
+        [Route("GetReservationsWithCustomer/{custId}")]
+        public List<Reservation> GetReservationByCustId(int custId)
+        {
+            return _reservationService.GetReservationByCustId(custId);
+        }
     }
 
 

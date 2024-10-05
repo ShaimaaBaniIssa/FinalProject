@@ -93,6 +93,46 @@ namespace FinalProject.Infra.Repository
             _dbContext.Connection.Execute("Reservation_Package.DeleteReservation", p, commandType: CommandType.StoredProcedure);
 
         }
+        public async Task<List<Reservation>> GetReservationsWithCustomer()
+        {
+            var p = new DynamicParameters();
+            var result = await _dbContext.Connection.QueryAsync<Reservation, Customer, Reservation>
+                ("Reservation_Package.GetReservationsWithCustomer",
+            (reservation, customer) =>
+            {
+                reservation.Customer = new Customer
+                {
+                    Customerid = customer.Customerid,
+                    Email = customer.Email,
+                    Fname = customer.Fname,
+                    Latitude = customer.Latitude,
+                    Longitude = customer.Longitude,
+                    Lname = customer.Lname,
+                    Phonenumber = customer.Phonenumber
+                };
+                return reservation;
+            },
+            splitOn: "Customerid",
+            commandType: CommandType.StoredProcedure
+
+            );
+            
+            return result.ToList();
+        }
+        public List<Reservation> GetReservationByCustId(int custId)
+
+        {
+
+            var p = new DynamicParameters(); 
+
+            p.Add("p_customerId", custId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<Reservation>("Reservation_Package.GetReservationByCustId", p, commandType: CommandType.StoredProcedure);
+
+            return result.ToList() ;    
+
+        }
+
     }
 
 }

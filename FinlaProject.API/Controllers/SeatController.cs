@@ -51,5 +51,13 @@ namespace FinalProject.API.Controllers
         {
             _seatServices.DeleteSeat(id);
         }
+
+        [HttpGet]
+        [Route("GetTripScheduleSeats/{tripScheduleId}")]
+        public List<Seat> GetTrainSeats(int tripScheduleId)
+        {
+            return _seatServices.GetTripScheduleSeats(tripScheduleId);
+
+        }
     }
 }

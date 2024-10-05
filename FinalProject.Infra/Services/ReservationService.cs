@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Core.Services
 {
-    public class ReservationService: IReservationService
+    public class ReservationService : IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
         public ReservationService(IReservationRepository reservationRepository)
@@ -35,7 +35,14 @@ namespace FinalProject.Core.Services
         {
             _reservationRepository.DeleteReservation(id);
         }
-
+        public Task<List<Reservation>> GetReservationsWithCustomer()
+        {
+            return _reservationRepository.GetReservationsWithCustomer();
+        }
+        public List<Reservation> GetReservationByCustId(int custId)
+        {
+            return _reservationRepository.GetReservationByCustId(custId);
+        }
 
     }
 

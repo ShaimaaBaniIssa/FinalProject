@@ -14,5 +14,6 @@ namespace FinalProject.Core.Services
         void CreateSeat(Seat seat);
         void UpdateSeat(Seat seat);
         void DeleteSeat(int id);
+        List<Seat> GetTripScheduleSeats(int tripScheduleId);
     }
 }

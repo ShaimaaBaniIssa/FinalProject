@@ -14,6 +14,8 @@ namespace FinalProject.Core.Repository
         void CreateReservation(Reservation reservation);
         void UpdateReservation(Reservation reservation);
         void DeleteReservation(int id);
+        Task<List<Reservation>> GetReservationsWithCustomer();
+        List<Reservation> GetReservationByCustId(int custId);
 
     }
 }

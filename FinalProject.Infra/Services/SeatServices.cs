@@ -1,13 +1,6 @@
-﻿using Dapper;
-using FinalProject.Core.Data;
+﻿using FinalProject.Core.Data;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinalProject.Infra.Services
 {
@@ -41,6 +34,10 @@ namespace FinalProject.Infra.Services
         public void DeleteSeat(int id)
         {
             _seatRepository.DeleteSeat(id);
+        }
+        public List<Seat> GetTripScheduleSeats(int tripScheduleId)
+        {
+            return _seatRepository.GetTripScheduleSeats(tripScheduleId);
         }
     }
 }

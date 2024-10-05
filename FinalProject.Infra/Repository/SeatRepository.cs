@@ -69,7 +69,15 @@ namespace FinalProject.Infra.Repository
             p.Add("Id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Execute("Seat_Package.DeleteSeat", p, commandType: CommandType.StoredProcedure);
 
+        }
+        public List<Seat> GetTripScheduleSeats(int tripScheduleId)
+        {
+            var p = new DynamicParameters();
+            p.Add("S_tripscheduleid", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<Seat> result = _dbContext.Connection.Query<Seat>("Seat_Package.GetTrainSeats", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
 
         }
+
     }
 }
