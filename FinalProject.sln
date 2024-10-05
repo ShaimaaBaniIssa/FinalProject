@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject.API", "FinlaProject.API\FinalProject.API.csproj", "{6425CA75-72F9-4F33-9C13-8C6555212B42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject.API", "FinlaProject.API\FinalProject.API.csproj", "{6425CA75-72F9-4F33-9C13-8C6555212B42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject.Core", "FinalProject.Core\FinalProject.Core.csproj", "{4BA7BB35-6832-4788-A4D0-7A054101A908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject.Core", "FinalProject.Core\FinalProject.Core.csproj", "{4BA7BB35-6832-4788-A4D0-7A054101A908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject.Infra", "FinalProject.Infra\FinalProject.Infra.csproj", "{5AF8F1BD-12D6-424E-9C2D-98EF59A8AEEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject.Infra", "FinalProject.Infra\FinalProject.Infra.csproj", "{5AF8F1BD-12D6-424E-9C2D-98EF59A8AEEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
