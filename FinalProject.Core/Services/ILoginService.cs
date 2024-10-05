@@ -14,5 +14,6 @@ namespace FinalProject.Core.Services
         void CreateLogin(Login login);
         void UpdateLogin(Login login);
         void DeleteLogin(int id);
+        string Auth(Login login);
     }
 }

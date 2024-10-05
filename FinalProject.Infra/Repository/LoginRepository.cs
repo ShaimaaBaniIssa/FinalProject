@@ -87,5 +87,15 @@ namespace FinalProject.Infra.Repository
             _dbContext.Connection.Execute("Login_Package.DeleteLogin", p, commandType: CommandType.StoredProcedure);
 
         }
+
+        public Login Auth(Login login)
+        {
+            var p = new DynamicParameters();
+            //name from PROCEDURE(User_NAME,Pass)
+            p.Add("User_NAME", login.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("Pass", login.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+            var res = _dbContext.Connection.Query<Login>("Login_Package.User_Login", p, commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+            return res;
+        }
     }
 }

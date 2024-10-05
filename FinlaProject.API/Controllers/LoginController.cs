@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Services;
+using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,6 +44,22 @@ namespace FinalProject.API.Controllers
         public void DeleteLogin(int id)
         {
             _loginService.DeleteLogin(id);
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public IActionResult Auth(Login login)
+        {
+            var token = _loginService.Auth(login);
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                return Ok(token);
+            }
+
         }
     }
 }

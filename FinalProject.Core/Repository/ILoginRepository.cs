@@ -14,6 +14,7 @@ namespace FinalProject.Core.Repository
         void CreateLogin(Login login);
         void UpdateLogin(Login login);
         void DeleteLogin(int id);
+        Login Auth(Login login);
 
     }
 }
