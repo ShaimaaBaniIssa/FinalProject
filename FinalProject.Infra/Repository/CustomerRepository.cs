@@ -3,6 +3,7 @@ using FinalProject.Core.Common;
 using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
+using FinalProject.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,9 +16,11 @@ namespace FinalProject.Infra.Repository
     public class CustomerRepository : ICustomerRepository
     {
         private readonly IDbContext _dbContext;
-        public CustomerRepository(IDbContext dbContext)
+        private readonly IPasswordHasher _passwordHasher ;
+        public CustomerRepository(IDbContext dbContext, IPasswordHasher passwordHasher)
         {
             _dbContext = dbContext;
+            _passwordHasher = passwordHasher;
         }
         public List<Customer> GetAllCustomers()
         {
@@ -115,9 +118,10 @@ namespace FinalProject.Infra.Repository
             var id = p.Get<int>("p_CustomerId");
 
             var pLog = new DynamicParameters();
+            var hashPass = _passwordHasher.Hash(regInfo.Password);
 
             pLog.Add("p_UserName", regInfo.Username, dbType: DbType.String, direction: ParameterDirection.Input);
-            pLog.Add("p_Password", regInfo.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+            pLog.Add("p_Password", hashPass, dbType: DbType.String, direction: ParameterDirection.Input);
             pLog.Add("p_CustomerId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             pLog.Add("p_RoleId", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
 

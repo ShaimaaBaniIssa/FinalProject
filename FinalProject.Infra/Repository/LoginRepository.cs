@@ -2,6 +2,7 @@
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
 using FinalProject.Core.Repository;
+using FinalProject.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,9 +15,11 @@ namespace FinalProject.Infra.Repository
     public class LoginRepository : ILoginRepository
     {
         private readonly IDbContext _dbContext;
-        public LoginRepository(IDbContext dbContext)
+        private readonly IPasswordHasher _passwordHasher;
+        public LoginRepository(IDbContext dbContext,IPasswordHasher passwordHasher)
         {
             _dbContext = dbContext;
+            _passwordHasher = passwordHasher;
         }
         public List<Login> GetAllLogins()
         {
@@ -91,11 +94,19 @@ namespace FinalProject.Infra.Repository
         public Login Auth(Login login)
         {
             var p = new DynamicParameters();
+           
             //name from PROCEDURE(User_NAME,Pass)
             p.Add("User_NAME", login.Username, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("Pass", login.Password, dbType: DbType.String, direction: ParameterDirection.Input);
             var res = _dbContext.Connection.Query<Login>("Login_Package.User_Login", p, commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
-            return res;
+            var hashPass = _passwordHasher.Verify(res.Password, login.Password);
+            if (hashPass == false)
+            {
+                return null;
+            }
+            else
+            {
+                return res;
+            }
         }
     }
 }
