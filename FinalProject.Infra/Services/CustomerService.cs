@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
 using System;
@@ -37,6 +38,11 @@ namespace FinalProject.Infra.Services
             _customerRepository.DeleteCustomer(id);
         }
 
+        public void Registration(Registration regInfo)
+        {
+            _customerRepository.Registration(regInfo);
+
+        }
 
     }
 }

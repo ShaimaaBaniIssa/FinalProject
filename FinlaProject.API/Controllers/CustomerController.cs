@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +46,12 @@ namespace FinalProject.API.Controllers
             _customerService.DeleteCustomer(id);
         }
 
+        [HttpPost]
+        [Route("Registration")]
+        public void Registration(Registration regInfo)
+        {
+            _customerService.Registration(regInfo);
+
+        }
     }
 }
