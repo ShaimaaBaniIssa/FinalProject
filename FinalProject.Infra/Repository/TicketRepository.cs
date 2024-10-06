@@ -92,6 +92,41 @@ namespace FinalProject.Infra.Repository
             _dbContext.Connection.Execute("Ticket_Package.DeleteTicket", p, commandType: CommandType.StoredProcedure);
 
         }
+        public async Task<List<Ticket>> GetTicketsWithReservation()
+        {
+            var p = new DynamicParameters(); 
+            var result = await _dbContext.Connection.QueryAsync<Ticket, Reservation, Ticket>
+                ("Ticket_Package.GetTicketsWithReservations",
+            (ticket, reservation) =>
+            {
+                
+                ticket.Reservation = new Reservation
+                {
+                    Reservationid = reservation.Reservationid,  
+                    Customerid = reservation.Customerid,       
+                    Reservationdate = reservation.Reservationdate, 
+                    Totalprice = reservation.Totalprice,       
+                    Tripscheduleid = reservation.Tripscheduleid 
+                };
+                return ticket; 
+            },
+            splitOn: "Reservationid", 
+            commandType: CommandType.StoredProcedure
+            );
+
+            return result.ToList();
+        }
+
+        
+        public List<Ticket> GetTicketsByReservationId(int reservationId)
+        {
+            var p = new DynamicParameters();  
+            p.Add("p_reservationId", reservationId, dbType: DbType.Int32, direction: ParameterDirection.Input); 
+
+            var result = _dbContext.Connection.Query<Ticket>("Ticket_Package.GetTicketsByReservationId", p, commandType: CommandType.StoredProcedure); 
+
+            return result.ToList(); 
+        }
     }
 }
 

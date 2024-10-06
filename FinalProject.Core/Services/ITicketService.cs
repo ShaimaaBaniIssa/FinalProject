@@ -15,5 +15,7 @@ namespace FinalProject.Core.Services
         void CreateTicket(Ticket ticket);
         void UpdateTicket(Ticket ticket);
         void DeleteTicket(int id);
+        Task<List<Ticket>> GetTicketsWithReservation();
+        List<Ticket> GetTicketsByReservationId(int reservationId);
     }
 }

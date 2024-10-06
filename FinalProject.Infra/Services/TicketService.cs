@@ -37,8 +37,14 @@ namespace FinalProject.Infra.Services
         {
             _ticketRepository.DeleteTicket(id);
         }
-
-
+        public Task<List<Ticket>> GetTicketsWithReservation()
+        {
+            return _ticketRepository.GetTicketsWithReservation();
+        }
+        public List<Ticket> GetTicketsByReservationId(int reservationId)
+        {
+            return _ticketRepository.GetTicketsByReservationId(reservationId);
+        }
     }
 
 }

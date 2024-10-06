@@ -45,7 +45,18 @@ namespace FinalProject.API.Controllers
         {
             _ticketService.DeleteTicket(id);
         }
-
+        [HttpGet]
+        [Route("GetTicketsWithReservation")]
+        public async Task<List<Ticket>> GetTicketsWithReservation()
+        {
+            return await _ticketService.GetTicketsWithReservation();
+        }
+        [HttpGet]
+        [Route("GetTicketsByReservationId/{reservationId}")]
+        public List<Ticket> GetTicketsByReservationId(int reservationId)
+        {
+            return _ticketService.GetTicketsByReservationId(reservationId);
+        }
 
 
 
