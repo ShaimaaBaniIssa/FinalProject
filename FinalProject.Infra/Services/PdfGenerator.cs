@@ -58,7 +58,7 @@ namespace FinalProject.Infra.Services
                      column.Item().Row(row =>
                      {
                          row.RelativeItem().Text($"Reservation Date: {invoice.Reservationdate?.ToString("dd MMMM yyyy")}");
-                         row.RelativeItem().Text($"Destination: {invoice.Destadress}").AlignRight();
+                         row.RelativeItem().Text($"Destination: {invoice.Destaddress}").AlignRight();
                      });
 
                      column.Item().Row(row =>

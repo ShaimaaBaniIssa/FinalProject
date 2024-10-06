@@ -433,7 +433,7 @@ namespace FinalProject.Core.Data
                     .HasPrecision(1)
                     .HasColumnName("WEDNESDAY");
 
-                entity.Property(e => e.Destadress)
+                entity.Property(e => e.Destaddress)
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("DESTADDRESS");
