@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using FinalProject.Core.Utility;
 using FinalProject.Infra.Services;
@@ -37,25 +38,38 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("CreateReservation")]
-        public void CreateReservation(Reservation reservation)
+        public void CreateReservation([FromBody] CreateReservationDto createReservationDto)
         {
-            _reservationService.CreateReservation(reservation);
-            // شغل محمد
-
-
-            // get invoice info
-            var invoice = _reservationService.GetInvoice((int)reservation.Reservationid);
            
-            // generate pdf
-            var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+            // شغل محمد
+           
+                _reservationService.CreateReservationAndTickets(
+                    createReservationDto.TripScheduleId,
+                    createReservationDto.CustomerId,
+                    createReservationDto.ReservationDate,
+                    createReservationDto.SeatIds,
+                    createReservationDto.FullName,
+                    createReservationDto.NationalId,
+                    createReservationDto.DateOfBirth,
+                    createReservationDto.Gender,
+                    createReservationDto.TicketPrice);
 
-            //get user email
-            var customer = _customerService.GetCustomerById((int)reservation.Customerid);
+                
+           
 
-            // send it to the user
-             _emailSender.SendEmail(customer.Email, "Booking Invoice",
-                $"Thank you for choosing {invoice.Stationname} for your upcoming stay. We are delighted to have you as our guest and look forward to providing you with an exceptional experience.\n\nPlease find your booking invoice attached to this email for your reference.",
-                pdf);
+        //    // get invoice info
+        //    var invoice = _reservationService.GetInvoice((int)reservation.Reservationid);
+           
+        //    // generate pdf
+        //    var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+
+        //    //get user email
+        //    var customer = _customerService.GetCustomerById((int)reservation.Customerid);
+
+        //    // send it to the user
+        //     _emailSender.SendEmail(customer.Email, "Booking Invoice",
+        //        $"Thank you for choosing {invoice.Stationname} for your upcoming stay. We are delighted to have you as our guest and look forward to providing you with an exceptional experience.\n\nPlease find your booking invoice attached to this email for your reference.",
+        //        pdf);
         }
         [HttpPut]
 
@@ -82,6 +96,9 @@ namespace FinalProject.API.Controllers
         {
             return _reservationService.GetReservationByCustId(custId);
         }
+        
+       
+
     }
 
 

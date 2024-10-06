@@ -18,6 +18,9 @@ namespace FinalProject.Core.Repository
         Task<List<Reservation>> GetReservationsWithCustomer();
         List<Reservation> GetReservationByCustId(int custId);
         Invoice GetInvoice(int reservationId);
+        void CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
+                                           List<int> seatIds, string fullName, string nationalId,
+                                           DateTime dateOfBirth, string gender, decimal ticketPrice);
 
     }
 }

@@ -144,8 +144,46 @@ namespace FinalProject.Infra.Repository
 
             return result.SingleOrDefault();
         }
+        public void CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
+                                           List<int> seatIds, string fullName, string nationalId,
+                                           DateTime dateOfBirth, string gender, decimal ticketPrice)
+        {
+            decimal totalPrice = ticketPrice * seatIds.Count;
 
+            var pReservation = new DynamicParameters();
+            pReservation.Add("p_tripScheduleId", tripScheduleId, DbType.Int32, ParameterDirection.Input);
+            pReservation.Add("p_customerId", customerId, DbType.Int32, ParameterDirection.Input);
+            pReservation.Add("p_reservationDate", reservationDate, DbType.Date, ParameterDirection.Input);
+            pReservation.Add("p_totalPrice", totalPrice, DbType.Decimal, ParameterDirection.Input);
+            pReservation.Add("p_r_date", DateTime.Now, DbType.Date, ParameterDirection.Input);
+            pReservation.Add("p_ReservationId", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
+            _dbContext.Connection.Execute("Reservation_Package.CreateReservation", pReservation, commandType: CommandType.StoredProcedure);
+
+            int reservationId = pReservation.Get<int>("p_ReservationId");
+
+            foreach (var seatId in seatIds)
+            {
+                var pTicket = new DynamicParameters();
+                pTicket.Add("p_ReservationId", reservationId, DbType.Int32, ParameterDirection.Input);
+                pTicket.Add("p_SeatId", seatId, DbType.Int32, ParameterDirection.Input);
+                pTicket.Add("p_FullName", fullName, DbType.String, ParameterDirection.Input);
+                pTicket.Add("p_NationalId", nationalId, DbType.String, ParameterDirection.Input);
+                pTicket.Add("p_DateOfBirth", dateOfBirth, DbType.Date, ParameterDirection.Input);
+                pTicket.Add("p_Gender", gender, DbType.String, ParameterDirection.Input);
+
+                _dbContext.Connection.Execute("Ticket_Package.CreateTicket", pTicket, commandType: CommandType.StoredProcedure);
+
+                var pSeat = new DynamicParameters();
+                pSeat.Add("p_seatId", seatId, DbType.Int32, ParameterDirection.Input);
+                pSeat.Add("p_availability", 0, DbType.Int32, ParameterDirection.Input);
+
+                _dbContext.Connection.Execute("Seat_Package.UpdateSeatAvailability", pSeat, commandType: CommandType.StoredProcedure);
+            }
+        }
+    
+
+  
     }
 
 }

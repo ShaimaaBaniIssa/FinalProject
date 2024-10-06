@@ -51,7 +51,14 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetInvoice(reservationId);
         }
-
+        public void CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
+                                           List<int> seatIds, string fullName, string nationalId,
+                                           DateTime dateOfBirth, string gender, decimal ticketPrice)
+        {
+            _reservationRepository.CreateReservationAndTickets( tripScheduleId,  customerId,  reservationDate,
+                                            seatIds,  fullName,  nationalId,
+                                            dateOfBirth,  gender,  ticketPrice);
+        }
     }
 }
 
