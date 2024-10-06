@@ -16,28 +16,29 @@ namespace FinalProject.Infra.Services
         {
             _bankCardRepository = bankCardRepository;
         }
-        public List<Bankcard> GetAllBankCards()
+
+        public Bankcard ValidateBankCard(Bankcard bankcard)
         {
-            return _bankCardRepository.GetAllBankCards();
-        }
-        public Bankcard GetBankCardById(int id)
-        {
-            return _bankCardRepository.GetBankCardById(id);
-        }
-        public void CreateBankCard(Bankcard bankcard)
-        {
-            _bankCardRepository.CreateBankCard(bankcard);
-        }
-        public void UpdateBankCard(Bankcard bankcard)
-        {
-            _bankCardRepository.UpdateBankCard(bankcard);
-        }
-        public void DeleteBankCard(int id)
-        {
-            _bankCardRepository.DeleteBankCard(id);
+            return _bankCardRepository.ValidateBankCard(bankcard);
         }
 
+        public void UpdateBalance(string cardNumber, decimal balance)
+        {
+            _bankCardRepository.UpdateBalance(cardNumber, balance);
+        }
+        public bool Pay(Bankcard bankcard, decimal price, int reservationId)
+        {
+            var card = ValidateBankCard(bankcard);
+            if (card == null) return false;
+            if (card.Balance < price) return false;
+            card.Balance -= price;
+            UpdateBalance(card.Cardnumber, card.Balance.Value);
+            return true;
 
+
+
+
+        }
     }
 
 

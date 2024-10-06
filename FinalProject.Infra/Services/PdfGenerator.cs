@@ -19,75 +19,51 @@ namespace FinalProject.Infra.Services
             QuestPDF.Settings.License = LicenseType.Community;
                 return Document.Create(container =>
                 {
-                    container
-                 .Page(page =>
-                 {
-                     page.Size(PageSizes.A4);
-                     page.Margin(2, Unit.Centimetre);
-                     page.DefaultTextStyle(x => x.FontSize(12).FontFamily("Arial"));
+                    container.Page(page =>
+                    {
+                        page.Size(PageSizes.A4);
+                        page.Margin(2, Unit.Centimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(16));
 
-                     page.Header().Row(row =>
-                     {
-                         row.RelativeItem().Column(column =>
-                         {
-                             column.Item().Text("INVOICE").FontSize(24).SemiBold().FontColor(Colors.Brown.Medium);
-                             column.Item().Text($"Date: {DateTime.Now:dd MMMM yyyy}").FontSize(12);
-                         });
+                        page.Header()
+                            .AlignCenter()
+                            .Text("Train Ticket")
+                            .FontSize(24)
+                            .Bold();
 
+                        page.Content()
+                            .Column(column =>
+                            {
+                                column.Spacing(20);
 
-                         row.ConstantItem(100).Height(50).AlignRight().AlignMiddle().Image(invoice.LogoPath, ImageScaling.FitArea);
-                     });
+                                column.Item().Row(row =>
+                                {
+                                    row.RelativeItem().Column(col =>
+                                    {
+                                        col.Item().Text($"Customer: {invoice.Fname}");
+                                        col.Item().Text($"From: {invoice.Stationname}");
+                                        col.Item().Text($"To: {invoice.Destadress}");
+                                    });
 
-                     page.Content().Column(column =>
-                     {
-                         column.Spacing(10);
-                         column.Item().PaddingVertical(10).LineHorizontal(1).LineColor(Colors.Grey.Lighten1);
+                                    row.RelativeItem().Column(col =>
+                                    {
+                                        col.Item().Text($"Seat Number: {invoice.Seatnumber}");
+                                        col.Item().Text($"Price: {invoice.Totalprice:C}");
+                                    });
+                                });
 
-                         column.Item().Row(row =>
-                         {
-                             row.RelativeItem().Text($"Billed To:").SemiBold();
-                             row.RelativeItem().Text($"Hotel:").SemiBold().AlignRight();
-                         });
+                                column.Item().Row(row =>
+                                {
+                                    row.RelativeItem().Text($"Reservation Date: {invoice.Reservationdate?.ToString("yyyy-MM-dd")}");
+                                    row.RelativeItem().Text($"Trip Date: {invoice.RDate?.ToString("yyyy-MM-dd")}");
+                                });
+                            });
 
-                         column.Item().Row(row =>
-                         {
-                             row.RelativeItem().Text(invoice.CustomerName);
-                             row.RelativeItem().Text(invoice.HotelName).AlignRight();
-                         });
-
-                         column.Item().Row(row =>
-                         {
-                             row.RelativeItem().Text($"Check-In: {invoice.CheckIn?.ToString("dd MMMM yyyy")}");
-                             row.RelativeItem().Text($"Room Id: {invoice.RoomId}").AlignRight();
-                         });
-
-                         column.Item().Row(row =>
-                         {
-                             row.RelativeItem().Text($"Check-Out: {invoice.CheckOut?.ToString("dd MMMM yyyy")}");
-                             row.RelativeItem().Text($"Room Type: {invoice.RoomType}").AlignRight();
-
-
-                         });
-
-                         column.Item().Text($"Card Number: {invoice.CardNumber}").FontSize(10).Italic();
-
-                         column.Item().LineHorizontal(1).LineColor(Colors.Grey.Lighten1);
-
-                         column.Item().PaddingVertical(10).AlignRight().Column(innerColumn =>
-                         {
-
-                             innerColumn.Item().Text("Total Price:").FontSize(14).SemiBold().AlignRight().FontColor(Colors.Black);
-                             innerColumn.Item().Text($"{invoice.TotalPrice?.ToString()} JOD").FontSize(16).Bold().AlignRight().FontColor(Colors.Red.Medium);
-                         });
-                     });
-
-                     page.Footer().AlignCenter().Text(text =>
-                     {
-                         text.Span("Thank you for choosing ").FontSize(10);
-                         text.Span($"{invoice.HotelName}.").FontSize(10).SemiBold();
-                         text.Line("We are delighted to have you as our guest and appreciate your trust in us.").FontSize(10);
-                     });
-                 });
+                        page.Footer()
+                            .AlignCenter()
+                            .Text("Thank you for your reservation!");
+                    });
                 });
             }
 

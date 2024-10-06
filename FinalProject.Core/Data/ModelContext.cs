@@ -433,6 +433,11 @@ namespace FinalProject.Core.Data
                     .HasPrecision(1)
                     .HasColumnName("WEDNESDAY");
 
+                entity.Property(e => e.Destadress)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("DESTADDRESS");
+
                 entity.HasOne(d => d.Station)
                     .WithMany(p => p.Trips)
                     .HasForeignKey(d => d.Stationid)

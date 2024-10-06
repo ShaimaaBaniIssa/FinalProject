@@ -9,10 +9,7 @@ namespace FinalProject.Core.Services
 {
     public interface IBankCardService
     {
-        List<Bankcard> GetAllBankCards();
-        Bankcard GetBankCardById(int id);
-        void CreateBankCard(Bankcard bankcard);
-        void UpdateBankCard(Bankcard bankcard);
-        void DeleteBankCard(int id);
+        Bankcard ValidateBankCard(Bankcard bankcard);
+        void UpdateBalance(string cardNumber, decimal balance);
     }
 }

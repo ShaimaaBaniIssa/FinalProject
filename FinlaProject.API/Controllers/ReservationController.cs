@@ -1,8 +1,11 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Services;
+using FinalProject.Core.Utility;
 using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using QuestPDF.Fluent;
+using System.IO;
 
 namespace FinalProject.API.Controllers
 {
@@ -11,10 +14,15 @@ namespace FinalProject.API.Controllers
     public class ReservationController : ControllerBase
     {
         private readonly IReservationService _reservationService;
-        public ReservationController(IReservationService reservationService)
+        private readonly IPdfGenerator _pdfGenerator;
+        private readonly IEmailSender _emailSender;
+        private readonly ICustomerService _customerService;
+        public ReservationController(IReservationService reservationService, IPdfGenerator pdfGenerator, IEmailSender emailSender, ICustomerService customerService)
         {
             _reservationService = reservationService;
-
+            _pdfGenerator = pdfGenerator;
+            _emailSender = emailSender;
+            _customerService = customerService;
         }
         [HttpGet]
         public List<Reservation> GetAllReservations()
@@ -32,6 +40,22 @@ namespace FinalProject.API.Controllers
         public void CreateReservation(Reservation reservation)
         {
             _reservationService.CreateReservation(reservation);
+            // شغل محمد
+
+
+            // get invoice info
+            var invoice = _reservationService.GetInvoice((int)reservation.Reservationid);
+           
+            // generate pdf
+            var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+
+            //get user email
+            var customer = _customerService.GetCustomerById((int)reservation.Customerid);
+
+            // send it to the user
+             _emailSender.SendEmail(customer.Email, "Booking Invoice",
+                $"Thank you for choosing {invoice.Stationname} for your upcoming stay. We are delighted to have you as our guest and look forward to providing you with an exceptional experience.\n\nPlease find your booking invoice attached to this email for your reference.",
+                pdf);
         }
         [HttpPut]
 

@@ -22,6 +22,7 @@ namespace FinalProject.Core.Data
         public bool? Friday { get; set; }
         public bool? Saturday { get; set; }
         public decimal? Stationid { get; set; }
+        public string? Destadress { get; set; }
 
         public virtual Station? Station { get; set; }
         public virtual ICollection<Tripschedule> Tripschedules { get; set; }

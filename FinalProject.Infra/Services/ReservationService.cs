@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Repository;
+using FinalProject.Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,12 @@ namespace FinalProject.Core.Services
     public class ReservationService : IReservationService
     {
         private readonly IReservationRepository _reservationRepository;
-        public ReservationService(IReservationRepository reservationRepository)
+        private readonly IBankCardService _bankCardService;
+        public ReservationService(IReservationRepository reservationRepository
+            , IBankCardService bankCardService)
         {
             _reservationRepository = reservationRepository;
+            _bankCardService = bankCardService;
         }
         public List<Reservation> GetAllReservations()
         {
@@ -43,11 +47,11 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetReservationByCustId(custId);
         }
+        public Invoice GetInvoice(int reservationId)
+        {
+            return _reservationRepository.GetInvoice(reservationId);
+        }
 
     }
-
-
-
-
 }
 

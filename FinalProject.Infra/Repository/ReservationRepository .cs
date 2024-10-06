@@ -2,6 +2,7 @@
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
 using FinalProject.Core.Repository;
+using FinalProject.Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -132,6 +133,18 @@ namespace FinalProject.Infra.Repository
             return result.ToList() ;    
 
         }
+
+        public Invoice GetInvoice(int reservationId)
+        {
+            var p = new DynamicParameters(); // pass data to database (stored proc.)
+
+            p.Add("p_reservationId", reservationId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<Invoice>("Reservation_Package.GetReservationDetails", p, commandType: CommandType.StoredProcedure);
+
+            return result.SingleOrDefault();
+        }
+
 
     }
 
