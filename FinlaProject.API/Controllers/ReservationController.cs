@@ -43,7 +43,7 @@ namespace FinalProject.API.Controllers
            
             // شغل محمد
            
-                _reservationService.CreateReservationAndTickets(
+               int resId= _reservationService.CreateReservationAndTickets(
                     createReservationDto.TripScheduleId,
                     createReservationDto.CustomerId,
                     createReservationDto.ReservationDate,
@@ -54,22 +54,24 @@ namespace FinalProject.API.Controllers
                     createReservationDto.Gender,
                     createReservationDto.TicketPrice);
 
-                
-           
 
-        //    // get invoice info
-        //    var invoice = _reservationService.GetInvoice((int)reservation.Reservationid);
-           
-        //    // generate pdf
-        //    var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
 
-        //    //get user email
-        //    var customer = _customerService.GetCustomerById((int)reservation.Customerid);
 
-        //    // send it to the user
-        //     _emailSender.SendEmail(customer.Email, "Booking Invoice",
-        //        $"Thank you for choosing {invoice.Stationname} for your upcoming stay. We are delighted to have you as our guest and look forward to providing you with an exceptional experience.\n\nPlease find your booking invoice attached to this email for your reference.",
-        //        pdf);
+            // get invoices info
+            var invoices = _reservationService.GetInvoice(resId);
+
+            //get user email
+            var customer = _customerService.GetCustomerById(createReservationDto.CustomerId);
+            // generate pdf
+            foreach (var invoice in invoices)
+            {
+                var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+
+                // send it to the user
+                _emailSender.SendEmail(customer.Email, "Booking Invoice",
+                   $"Train Ticket",
+                   pdf);
+            }
         }
         [HttpPut]
 

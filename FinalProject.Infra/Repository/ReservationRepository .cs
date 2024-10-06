@@ -134,7 +134,7 @@ namespace FinalProject.Infra.Repository
 
         }
 
-        public Invoice GetInvoice(int reservationId)
+        public List<Invoice> GetInvoice(int reservationId)
         {
             var p = new DynamicParameters(); // pass data to database (stored proc.)
 
@@ -142,9 +142,9 @@ namespace FinalProject.Infra.Repository
 
             var result = _dbContext.Connection.Query<Invoice>("Reservation_Package.GetReservationDetails", p, commandType: CommandType.StoredProcedure);
 
-            return result.SingleOrDefault();
+            return result.ToList();
         }
-        public void CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
+        public int CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
                                            List<int> seatIds, string fullName, string nationalId,
                                            DateTime dateOfBirth, string gender, decimal ticketPrice)
         {
@@ -179,7 +179,9 @@ namespace FinalProject.Infra.Repository
                 pSeat.Add("p_availability", 0, DbType.Int32, ParameterDirection.Input);
 
                 _dbContext.Connection.Execute("Seat_Package.UpdateSeatAvailability", pSeat, commandType: CommandType.StoredProcedure);
+                
             }
+            return reservationId;
         }
     
 
