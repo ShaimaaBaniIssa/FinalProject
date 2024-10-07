@@ -1,6 +1,8 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
+using FinalProject.Infra.Repository;
 
 namespace FinalProject.Infra.Services
 {
@@ -39,6 +41,10 @@ namespace FinalProject.Infra.Services
         public void UpdateStation(Station station)
         {
            _stationRepository.UpdateStation(station);
+        }
+        public List<StationCountDTO> CountStation(StationCountDTO stationCountDTO)
+        {
+            return _stationRepository.CountStation(stationCountDTO);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Http;
@@ -64,6 +65,12 @@ namespace FinalProject.API.Controllers
         public Task<List<Station>> GetStationsWithTrips()
         {
             return _stationService.GetStationsWithTrips();
+        }
+        [HttpGet]
+        [Route("CountStation")]
+        public List<StationCountDTO> CountStation(StationCountDTO stationCountDTO)
+        {
+            return _stationService.CountStation(stationCountDTO);
         }
     }
 }

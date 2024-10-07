@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 
 namespace FinalProject.Core.Repository
 {
@@ -10,5 +11,6 @@ namespace FinalProject.Core.Repository
         void UpdateStation(Station station);
         void DeleteStation(int id);
         Task<List<Station>> GetStationsWithTrips();
+        List<StationCountDTO> CountStation(StationCountDTO stationCountDTO);
     }
 }

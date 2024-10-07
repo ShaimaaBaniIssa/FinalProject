@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using System.Data;
 
@@ -98,6 +99,12 @@ namespace FinalProject.Infra.Repository
             return results.ToList();
 
 
+        }
+        public List<StationCountDTO> CountStation(StationCountDTO stationCountDTO)
+        {
+
+            IEnumerable<StationCountDTO> result = _dbContext.Connection.Query<StationCountDTO>("GetTotalStations", commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
     }
 }
