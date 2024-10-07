@@ -9,5 +9,6 @@ namespace FinalProject.Core.Repository
         void CreateTripSchedule(Tripschedule tripSchedule);
         void UpdateTripSchedule(Tripschedule tripSchedule);
         void DeleteTripSchedule(int id);
+        Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour);
     }
 }

@@ -78,6 +78,16 @@ namespace FinalProject.Infra.Repository
             return result.ToList();
 
         }
+        public void UpdateSeatAvailability(int seatId)
+        {
+            var pSeat = new DynamicParameters();
+            pSeat.Add("p_seatId", seatId, DbType.Int32, ParameterDirection.Input);
+            pSeat.Add("p_availability", 0, DbType.Int32, ParameterDirection.Input);
+
+            _dbContext.Connection.Execute("Seat_Package.UpdateSeatAvailability", pSeat, commandType: CommandType.StoredProcedure);
+
+
+        }
 
     }
 }

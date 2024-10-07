@@ -12,6 +12,12 @@ namespace FinalProject.Infra.Services
         {
             _tripScheduleRepository = tripScheduleRepository;
         }
+
+        public Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour)
+        {
+            return _tripScheduleRepository.CheckTripScheduleAvailability(tripId, date, hour);
+        }
+
         public void CreateTripSchedule(Tripschedule tripSchedule)
         {
             _tripScheduleRepository.CreateTripSchedule(tripSchedule);
@@ -27,6 +33,7 @@ namespace FinalProject.Infra.Services
             return _tripScheduleRepository.GetAllTripSchedules();   
         }
 
+      
         public Tripschedule GetTripScheduleById(int id)
         {
             return _tripScheduleRepository.GetTripScheduleById(id);

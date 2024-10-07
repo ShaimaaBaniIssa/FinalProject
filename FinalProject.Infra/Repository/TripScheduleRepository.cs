@@ -35,8 +35,8 @@ namespace FinalProject.Infra.Repository
         public void CreateTripSchedule(Tripschedule tripSchedule)
         {
             var p = new DynamicParameters();
-            p.Add("p_DepartureTime", tripSchedule.Departuretime, DbType.DateTime, ParameterDirection.Input);
-            p.Add("p_ArrivalTime", tripSchedule.Arrivaltime, DbType.DateTime, ParameterDirection.Input);
+            p.Add("p_DepartureTime", tripSchedule.Departuretime, DbType.String, ParameterDirection.Input);
+            p.Add("p_ArrivalTime", tripSchedule.Arrivaltime, DbType.String, ParameterDirection.Input);
             p.Add("p_TripId", tripSchedule.Tripid, DbType.Int32, ParameterDirection.Input);
             p.Add("p_TrainId", tripSchedule.Trainid, DbType.Int32, ParameterDirection.Input);
 
@@ -47,8 +47,8 @@ namespace FinalProject.Infra.Repository
         {
             var p = new DynamicParameters();
             p.Add("p_TripScheduleId", tripSchedule.Tripscheduleid, DbType.Int32, ParameterDirection.Input);
-            p.Add("p_DepartureTime", tripSchedule.Departuretime, DbType.DateTime, ParameterDirection.Input);
-            p.Add("p_ArrivalTime", tripSchedule.Arrivaltime, DbType.DateTime, ParameterDirection.Input);
+            p.Add("p_DepartureTime", tripSchedule.Departuretime, DbType.String, ParameterDirection.Input);
+            p.Add("p_ArrivalTime", tripSchedule.Arrivaltime, DbType.String, ParameterDirection.Input);
             p.Add("p_TripId", tripSchedule.Tripid, DbType.Int32, ParameterDirection.Input);
             p.Add("p_TrainId", tripSchedule.Trainid, DbType.Int32, ParameterDirection.Input);
 
@@ -61,6 +61,17 @@ namespace FinalProject.Infra.Repository
             p.Add("p_TripScheduleId", id, DbType.Int32, ParameterDirection.Input);
 
             _dbContext.Connection.Execute("TripSchedule_Package.DeleteTripSchedule", p, commandType: CommandType.StoredProcedure);
+        }
+        public Tripschedule CheckTripScheduleAvailability(int tripId,DateTime date ,string hour)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_tripid", tripId, DbType.Int32, ParameterDirection.Input);
+            p.Add("p_date", date, DbType.DateTime, ParameterDirection.Input);
+            p.Add("p_time", hour, DbType.String, ParameterDirection.Input);
+
+
+            var result = _dbContext.Connection.Query<Tripschedule>("TripSchedule_Package.CheckTripScheduleAvailability", p, commandType: CommandType.StoredProcedure);
+            return result.SingleOrDefault();
         }
     }
 }

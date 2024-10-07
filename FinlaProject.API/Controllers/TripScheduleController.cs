@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,13 @@ namespace FinalProject.API.Controllers
     public class TripScheduleController : ControllerBase
     {
         private readonly ITripScheduleService _tripScheduleService;
-        public TripScheduleController(ITripScheduleService tripScheduleService)
+        private readonly ISeatServices _seatServices;
+        private readonly ITripService _tripService;
+        public TripScheduleController(ITripScheduleService tripScheduleService,ISeatServices seatServices,ITripService tripService)
         {
             _tripScheduleService = tripScheduleService;
+             _seatServices = seatServices;
+            _tripService = tripService;
         }
         [HttpGet]
         public List<Tripschedule> GetAllTripSchedules()
@@ -42,6 +47,48 @@ namespace FinalProject.API.Controllers
         public void DeleteTripSchedule(int id)
         {
             _tripScheduleService.DeleteTripSchedule(id);
+        }
+        [HttpGet]
+        [Route("CheckTripScheduleAvailability")]
+        public AvailableTripScheduleDTO CheckTripScheduleAvailability(int tripId, DateTime reservationDate, string hour)
+        {
+            // check tripschedule 
+            // tripid, date, time
+            // available (train 
+            // check if the reservation date 
+            // List<seat>
+
+
+            // 1. match trip days
+            var dateName = reservationDate.DayOfWeek.ToString();
+            var trip = _tripService.GetTripById(tripId);
+            bool availableDay = false;
+            // check day
+            if (trip.Saturday.Value && dateName.Equals(DayOfWeek.Saturday))
+                availableDay = true;
+            else if (trip.Sunday.Value && dateName.Equals(DayOfWeek.Sunday))
+                availableDay = true;
+            else if (trip.Monday.Value && dateName.Equals(DayOfWeek.Monday))
+                availableDay = true;
+            else if (trip.Tuesday.Value && dateName.Equals(DayOfWeek.Tuesday))
+                availableDay = true;
+            else if (trip.Wednesday.Value && dateName.Equals(DayOfWeek.Wednesday))
+                availableDay = true;
+            else if (trip.Thursday.Value && dateName.Equals(DayOfWeek.Thursday))
+                availableDay = true;
+            else if (trip.Friday.Value && dateName.Equals(DayOfWeek.Friday))
+                availableDay = true;
+
+
+            // check date, time , tripid
+            var tripschedule = _tripScheduleService.CheckTripScheduleAvailability(tripId, reservationDate, hour);
+            var result = _seatServices.GetTripScheduleSeats((int)tripschedule.Tripscheduleid);
+            return new AvailableTripScheduleDTO
+            {
+                Seats = result.ToList(),
+                TripScheduleId = (int)tripschedule.Tripscheduleid
+            };
+
         }
     }
 }

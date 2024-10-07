@@ -11,8 +11,8 @@ namespace FinalProject.Core.Data
         }
 
         public decimal Tripscheduleid { get; set; }
-        public DateTime? Departuretime { get; set; }
-        public DateTime? Arrivaltime { get; set; }
+        public string? Departuretime { get; set; }
+        public string? Arrivaltime { get; set; }
         public decimal? Tripid { get; set; }
         public decimal? Trainid { get; set; }
         public DateTime? Tdate { get; set; }

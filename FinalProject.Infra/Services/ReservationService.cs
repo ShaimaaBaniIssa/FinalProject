@@ -27,9 +27,9 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetReservationById(id);
         }
-        public void CreateReservation(Reservation reservation)
+        public int CreateReservation(Reservation reservation)
         {
-            _reservationRepository.CreateReservation(reservation);
+            return _reservationRepository.CreateReservation(reservation);
         }
         public void UpdateReservation(Reservation reservation)
         {
@@ -51,14 +51,7 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetInvoice(reservationId);
         }
-        public int CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
-                                           List<int> seatIds, string fullName, string nationalId,
-                                           DateTime dateOfBirth, string gender, decimal ticketPrice)
-        {
-            return _reservationRepository.CreateReservationAndTickets( tripScheduleId,  customerId,  reservationDate,
-                                            seatIds,  fullName,  nationalId,
-                                            dateOfBirth,  gender,  ticketPrice);
-        }
+      
     }
 }
 

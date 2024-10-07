@@ -12,15 +12,12 @@ namespace FinalProject.Core.Services
     {
         List<Reservation> GetAllReservations();
         Reservation GetReservationById(int id);
-        void CreateReservation(Reservation reservation);
+        int CreateReservation(Reservation reservation);
         void UpdateReservation(Reservation reservation);
         void DeleteReservation(int id);
         Task<List<Reservation>> GetReservationsWithCustomer();
         List<Reservation> GetReservationByCustId(int custId);
         List<Invoice> GetInvoice(int reservationId);
-        int CreateReservationAndTickets(int tripScheduleId, int customerId, DateTime reservationDate,
-                                           List<int> seatIds, string fullName, string nationalId,
-                                           DateTime dateOfBirth, string gender, decimal ticketPrice);
-
+       
     }
 }
