@@ -1,8 +1,9 @@
-﻿using FinalProject.Core.Data;
+﻿using Dapper;
+using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
-using FinalProject.Infra.Repository;
+using System.Data;
 
 namespace FinalProject.Infra.Services
 {
@@ -42,9 +43,9 @@ namespace FinalProject.Infra.Services
         {
            _stationRepository.UpdateStation(station);
         }
-        public List<StationCountDTO> CountStation(StationCountDTO stationCountDTO)
+        public List<SearchStationDTO> SearchStation(string staionName)
         {
-            return _stationRepository.CountStation(stationCountDTO);
+            return _stationRepository.SearchStation(staionName);
         }
     }
 }

@@ -66,11 +66,13 @@ namespace FinalProject.API.Controllers
         {
             return _stationService.GetStationsWithTrips();
         }
+
+
         [HttpGet]
-        [Route("CountStation")]
-        public List<StationCountDTO> CountStation(StationCountDTO stationCountDTO)
+        [Route("SearchStation")]
+        public List<SearchStationDTO> SearchStation(string staionName)
         {
-            return _stationService.CountStation(stationCountDTO);
+            return _stationService.SearchStation(staionName);
         }
     }
 }
