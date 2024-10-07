@@ -116,6 +116,10 @@ namespace FinalProject.Core.Data
                 entity.Property(e => e.Phonenumber)
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("PHONENUMBER");
+                entity.Property(e => e.Address)
+                .HasMaxLength(35)
+                .IsUnicode(false)
+                .HasColumnName("ADDRESS");
             });
 
             modelBuilder.Entity<Login>(entity =>
@@ -469,7 +473,9 @@ namespace FinalProject.Core.Data
                 entity.Property(e => e.Tripid)
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("TRIPID");
-
+                entity.Property(e => e.Tdate)
+               .HasColumnType("DATE")
+               .HasColumnName("TDATE");
                 entity.HasOne(d => d.Train)
                     .WithMany(p => p.Tripschedules)
                     .HasForeignKey(d => d.Trainid)

@@ -15,6 +15,7 @@ namespace FinalProject.Core.Data
         public DateTime? Arrivaltime { get; set; }
         public decimal? Tripid { get; set; }
         public decimal? Trainid { get; set; }
+        public DateTime? Tdate { get; set; }
 
         public virtual Train? Train { get; set; }
         public virtual Trip? Trip { get; set; }
