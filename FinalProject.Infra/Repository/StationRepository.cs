@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using System.Data;
 
@@ -98,6 +99,16 @@ namespace FinalProject.Infra.Repository
             return results.ToList();
 
 
+        }
+
+
+
+        public List<SearchStationDTO> SearchStation(string staionName)
+        {
+            var p = new DynamicParameters();
+            p.Add("S_Name", staionName, DbType.String, ParameterDirection.Input);
+            var res = _dbContext.Connection.Query<SearchStationDTO>("SearchStation",p,commandType:CommandType.StoredProcedure);
+            return res.ToList();
         }
     }
 }
