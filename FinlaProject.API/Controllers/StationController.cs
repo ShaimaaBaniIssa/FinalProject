@@ -68,11 +68,17 @@ namespace FinalProject.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Route("SearchStation")]
         public List<SearchStationDTO> SearchStation(string staionName)
         {
             return _stationService.SearchStation(staionName);
+        }
+        [HttpGet]
+        [Route("CountCustomer")]
+        public List<StationCountDTO> StationCount(StationCountDTO stationCountDTO)
+        {
+            return _stationService.StationCount(stationCountDTO);
         }
     }
 }

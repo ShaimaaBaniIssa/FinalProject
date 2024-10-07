@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Http;
@@ -60,6 +61,12 @@ namespace FinalProject.API.Controllers
                 return Ok(token);
             }
 
+        }
+        [HttpGet]
+        [Route("CountCustomer")]
+        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
+        {
+            return _loginService.CountUser(userCountDTO);
         }
     }
 }

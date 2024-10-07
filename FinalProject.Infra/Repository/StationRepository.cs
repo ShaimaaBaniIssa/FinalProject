@@ -100,7 +100,12 @@ namespace FinalProject.Infra.Repository
 
 
         }
+        public List<StationCountDTO> StationCount(StationCountDTO stationCountDTO)
+        {
 
+            IEnumerable<StationCountDTO> result = _dbContext.Connection.Query<StationCountDTO>("GetTotalUsers", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
 
 
         public List<SearchStationDTO> SearchStation(string staionName)

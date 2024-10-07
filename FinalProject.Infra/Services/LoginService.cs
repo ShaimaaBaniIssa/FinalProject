@@ -1,6 +1,8 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
+using FinalProject.Infra.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -68,6 +70,10 @@ namespace FinalProject.Infra.Services
                 return tokenString;
 
             }
+        }
+        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
+        {
+            return _loginRepository.CountUser(userCountDTO);
         }
 
 

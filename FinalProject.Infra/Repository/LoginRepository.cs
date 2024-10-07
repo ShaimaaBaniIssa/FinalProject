@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
 using System;
@@ -108,5 +109,12 @@ namespace FinalProject.Infra.Repository
                 return res;
             }
         }
+        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
+        {
+
+            IEnumerable<UserCountDTO> result = _dbContext.Connection.Query<UserCountDTO>("GetTotalUsers", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+      
     }
 }

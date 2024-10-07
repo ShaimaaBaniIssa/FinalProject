@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace FinalProject.Core.Services
         void UpdateLogin(Login login);
         void DeleteLogin(int id);
         string Auth(Login login);
+        List<UserCountDTO> CountUser(UserCountDTO userCountDTO);
     }
 }
