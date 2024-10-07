@@ -68,7 +68,7 @@ namespace FinalProject.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Route("SearchStation")]
         public List<SearchStationDTO> SearchStation(string staionName)
         {
