@@ -16,7 +16,7 @@ namespace FinalProject.Core.Repository
         void UpdateLogin(Login login);
         void DeleteLogin(int id);
         Login Auth(Login login);
-        List<UserCountDTO> CountCustomer(UserCountDTO userCountDTO);
+        List<UserCountDTO> CountUser(UserCountDTO userCountDTO);
 
     }
 }

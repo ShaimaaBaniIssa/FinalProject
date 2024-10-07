@@ -109,7 +109,7 @@ namespace FinalProject.Infra.Repository
                 return res;
             }
         }
-        public List<UserCountDTO> CountCustomer(UserCountDTO userCountDTO)
+        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
         {
 
             IEnumerable<UserCountDTO> result = _dbContext.Connection.Query<UserCountDTO>("GetTotalUsers", commandType: CommandType.StoredProcedure);

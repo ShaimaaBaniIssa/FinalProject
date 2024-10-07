@@ -71,9 +71,9 @@ namespace FinalProject.Infra.Services
 
             }
         }
-        public List<UserCountDTO> CountCustomer(UserCountDTO userCountDTO)
+        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
         {
-            return _loginRepository.CountCustomer(userCountDTO);
+            return _loginRepository.CountUser(userCountDTO);
         }
 
 
