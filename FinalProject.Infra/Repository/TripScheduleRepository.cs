@@ -41,6 +41,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_ArrivalTime", tripSchedule.Arrivaltime, DbType.String, ParameterDirection.Input);
             p.Add("p_TripId", tripSchedule.Tripid, DbType.Int32, ParameterDirection.Input);
             p.Add("p_TrainId", tripSchedule.Trainid, DbType.Int32, ParameterDirection.Input);
+            p.Add("p_TDate", tripSchedule.Tdate, DbType.Date, ParameterDirection.Input);
 
             _dbContext.Connection.Execute("TripSchedule_Package.CreateTripSchedule", p, commandType: CommandType.StoredProcedure);
         }
@@ -53,6 +54,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_ArrivalTime", tripSchedule.Arrivaltime, DbType.String, ParameterDirection.Input);
             p.Add("p_TripId", tripSchedule.Tripid, DbType.Int32, ParameterDirection.Input);
             p.Add("p_TrainId", tripSchedule.Trainid, DbType.Int32, ParameterDirection.Input);
+            p.Add("p_TDate", tripSchedule.Tdate, DbType.Date, ParameterDirection.Input);
 
             _dbContext.Connection.Execute("TripSchedule_Package.UpdateTripSchedule", p, commandType: CommandType.StoredProcedure);
         }
