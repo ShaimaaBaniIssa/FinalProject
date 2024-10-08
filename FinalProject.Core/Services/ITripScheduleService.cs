@@ -10,6 +10,6 @@ namespace FinalProject.Core.Services
         void UpdateTripSchedule(Tripschedule tripSchedule);
         void DeleteTripSchedule(int id);
         Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour);
-        bool CheckTrainAvailabilty(int trainId, DateTime date);
+        bool CheckTrainAvailabilty(int trainId, DateTime date, string hour);
     }
 }

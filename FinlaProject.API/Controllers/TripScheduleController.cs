@@ -35,7 +35,7 @@ namespace FinalProject.API.Controllers
         public IActionResult CreateTripSchedule(Tripschedule tripSchedule)
         {
             // check first if the train is avaialble at the selected date
-            bool isAvailable = _tripScheduleService.CheckTrainAvailabilty((int)tripSchedule.Trainid, tripSchedule.Tdate.Value);
+            bool isAvailable = _tripScheduleService.CheckTrainAvailabilty((int)tripSchedule.Trainid, tripSchedule.Tdate.Value,tripSchedule.Departuretime);
             if (!isAvailable)
                 return BadRequest("Train is not available ");
 
