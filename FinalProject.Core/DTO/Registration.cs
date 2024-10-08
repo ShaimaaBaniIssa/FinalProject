@@ -17,7 +17,7 @@ namespace FinalProject.Core.DTO
         public decimal? Phonenumber { get; set; }
         public string? Username { get; set; }
         public string? Password { get; set; }
-        public decimal? Customerid { get; set; }
-        public decimal? Roleid { get; set; }
+        // public decimal? Customerid { get; set; }
+        // public decimal? Roleid { get; set; }
     }
 }

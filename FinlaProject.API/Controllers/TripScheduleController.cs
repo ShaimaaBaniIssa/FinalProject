@@ -32,9 +32,15 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("CreateTripSchedule")]
-        public void CreateTripSchedule(Tripschedule tripSchedule)
+        public IActionResult CreateTripSchedule(Tripschedule tripSchedule)
         {
+            // check first if the train is avaialble at the selected date
+            bool isAvailable = _tripScheduleService.CheckTrainAvailabilty((int)tripSchedule.Trainid, tripSchedule.Tdate.Value);
+            if (!isAvailable)
+                return BadRequest("Train is not available ");
+
             _tripScheduleService.CreateTripSchedule(tripSchedule);
+            return Ok();
         }
         [HttpPut]
         [Route("UpdateTripSchedule")]

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static QuestPDF.Helpers.Colors;
 
 namespace FinalProject.Infra.Repository
 {
@@ -72,6 +74,21 @@ namespace FinalProject.Infra.Repository
 
             var result = _dbContext.Connection.Query<Tripschedule>("TripSchedule_Package.CheckTripScheduleAvailability", p, commandType: CommandType.StoredProcedure);
             return result.SingleOrDefault();
+        }
+        public bool CheckTrainAvailabilty(int trainId, DateTime date)
+        {
+
+            var p = new DynamicParameters();
+            p.Add("p_date", date, DbType.DateTime, ParameterDirection.Input);
+            p.Add("p_trainId", trainId, DbType.Int32, ParameterDirection.Input);
+
+            p.Add("p_count",dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            _dbContext.Connection.Execute("TripSchedule_Package.CheckTrainAvailabilty", p, commandType: CommandType.StoredProcedure);
+            int count = p.Get<int>("p_count");
+
+            
+            return count == 0 ? true : false;
         }
     }
 }

@@ -123,7 +123,7 @@ namespace FinalProject.Infra.Repository
             pLog.Add("p_UserName", regInfo.Username, dbType: DbType.String, direction: ParameterDirection.Input);
             pLog.Add("p_Password", hashPass, dbType: DbType.String, direction: ParameterDirection.Input);
             pLog.Add("p_CustomerId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            pLog.Add("p_RoleId", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pLog.Add("p_RoleId", 1, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
 
