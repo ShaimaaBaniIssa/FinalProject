@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 
 namespace FinalProject.Core.Repository
 {
@@ -9,5 +10,6 @@ namespace FinalProject.Core.Repository
         void CreateTripSchedule(Tripschedule tripSchedule);
         void UpdateTripSchedule(Tripschedule tripSchedule);
         void DeleteTripSchedule(int id);
+        List<SearchTripDTO> SearchTrip(DateTime tDate);
     }
 }

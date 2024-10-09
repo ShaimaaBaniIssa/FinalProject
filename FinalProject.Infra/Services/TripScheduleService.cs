@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
 
@@ -35,6 +36,10 @@ namespace FinalProject.Infra.Services
         public void UpdateTripSchedule(Tripschedule tripSchedule)
         {
             _tripScheduleRepository.UpdateTripSchedule(tripSchedule);
+        }
+        public List<SearchTripDTO> SearchTrip(DateTime tDate)
+        {
+            return _tripScheduleRepository.SearchTrip(tDate);
         }
     }
 }

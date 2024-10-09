@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,12 @@ namespace FinalProject.API.Controllers
         public void DeleteTripSchedule(int id)
         {
             _tripScheduleService.DeleteTripSchedule(id);
+        }
+        [HttpGet]
+        [Route("SearchTrip")]
+        public List<SearchTripDTO> SearchTrip(DateTime tDate)
+        {
+            return _tripScheduleService.SearchTrip(tDate);
         }
     }
 }
