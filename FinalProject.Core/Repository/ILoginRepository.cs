@@ -17,6 +17,7 @@ namespace FinalProject.Core.Repository
         void DeleteLogin(int id);
         Login Auth(Login login);
         List<UserCountDTO> CountUser(UserCountDTO userCountDTO);
+        void Registration(Registration regInfo);
 
     }
 }

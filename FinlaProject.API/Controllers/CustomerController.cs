@@ -32,8 +32,8 @@ namespace FinalProject.API.Controllers
         {
             _customerService.CreateCustomer(customer);
         }
-        [HttpPut]
 
+        [HttpPut]
         [Route("UpdateCustomer")]
         public void UpdateCustomer(Customer customer)
         {
@@ -46,12 +46,13 @@ namespace FinalProject.API.Controllers
             _customerService.DeleteCustomer(id);
         }
 
-        [HttpPost]
-        [Route("Registration")]
-        public void Registration(Registration regInfo)
-        {
-            _customerService.Registration(regInfo);
 
+        [HttpPut]
+        [Route("UpdateLatLong")]
+        public void UpdateLatLong(int id, decimal Latitude, decimal Longitude)
+        {
+            _customerService.UpdateLatLong(id, Latitude, Longitude);
         }
+
     }
 }

@@ -115,6 +115,41 @@ namespace FinalProject.Infra.Repository
             IEnumerable<UserCountDTO> result = _dbContext.Connection.Query<UserCountDTO>("GetTotalUsers", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
-      
+
+        public void Registration(Registration regInfo)
+
+        {
+
+            var p = new DynamicParameters();
+
+            //p.Add("p_Latitude", regInfo.Latitude, dbType: DbType.Decimal, direction: ParameterDirection.Input);
+            //p.Add("p_Longitude", regInfo.Longitude, dbType: DbType.Decimal, direction: ParameterDirection.Input);
+            p.Add("p_FName", regInfo.Fname, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_LName", regInfo.Lname, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Email", regInfo.Email, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PhoneNumber", regInfo.Phonenumber, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_adress", regInfo.Address, dbType: DbType.String, direction: ParameterDirection.Input);
+            // Output parameter for CustomerId
+            p.Add("p_CustomerId", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+
+            _dbContext.Connection.Execute("Customer_Package.CreateCustomer", p, commandType: CommandType.StoredProcedure);
+            // Retrieve the CustomerId from the OUT parameter
+            var id = p.Get<int>("p_CustomerId");
+
+            var pLog = new DynamicParameters();
+            var hashPass = _passwordHasher.Hash(regInfo.Password);
+
+            pLog.Add("p_UserName", regInfo.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            pLog.Add("p_Password", hashPass, dbType: DbType.String, direction: ParameterDirection.Input);
+            pLog.Add("p_CustomerId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            pLog.Add("p_RoleId", 1, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+
+            _dbContext.Connection.Execute("Login_Package.CreateLogin", pLog, commandType: CommandType.StoredProcedure);
+
+        }
+
     }
 }

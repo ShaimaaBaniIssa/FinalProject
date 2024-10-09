@@ -17,5 +17,6 @@ namespace FinalProject.Core.Services
         void DeleteLogin(int id);
         string Auth(Login login);
         List<UserCountDTO> CountUser(UserCountDTO userCountDTO);
+        void Registration(Registration regInfo);
     }
 }
