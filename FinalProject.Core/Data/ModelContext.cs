@@ -116,6 +116,10 @@ namespace FinalProject.Core.Data
                 entity.Property(e => e.Phonenumber)
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("PHONENUMBER");
+                entity.Property(e => e.Address)
+                .HasMaxLength(35)
+                .IsUnicode(false)
+                .HasColumnName("ADDRESS");
             });
 
             modelBuilder.Entity<Login>(entity =>
@@ -455,11 +459,13 @@ namespace FinalProject.Core.Data
                     .HasColumnName("TRIPSCHEDULEID");
 
                 entity.Property(e => e.Arrivaltime)
-                    .HasPrecision(6)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
                     .HasColumnName("ARRIVALTIME");
 
                 entity.Property(e => e.Departuretime)
-                    .HasPrecision(6)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
                     .HasColumnName("DEPARTURETIME");
 
                 entity.Property(e => e.Trainid)
@@ -469,6 +475,10 @@ namespace FinalProject.Core.Data
                 entity.Property(e => e.Tripid)
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("TRIPID");
+
+                entity.Property(e => e.Tdate)
+               .HasColumnType("DATE")
+               .HasColumnName("TDATE");
 
                 entity.HasOne(d => d.Train)
                     .WithMany(p => p.Tripschedules)

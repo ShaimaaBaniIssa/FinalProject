@@ -1,9 +1,11 @@
-﻿using FinalProject.Core.Data;
+﻿using Dapper;
+using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,12 +39,11 @@ namespace FinalProject.Infra.Services
         {
             _customerRepository.DeleteCustomer(id);
         }
-
-        public void Registration(Registration regInfo)
+        public void UpdateLatLong(int id, decimal Latitude, decimal Longitude)
         {
-            _customerRepository.Registration(regInfo);
-
+           _customerRepository.UpdateLatLong(id, Latitude, Longitude);
         }
+
 
     }
 }

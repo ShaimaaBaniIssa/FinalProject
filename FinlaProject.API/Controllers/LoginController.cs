@@ -68,5 +68,12 @@ namespace FinalProject.API.Controllers
         {
             return _loginService.CountUser(userCountDTO);
         }
+        [HttpPost]
+        [Route("Registration")]
+        public void Registration(Registration regInfo)
+        {
+            _loginService.Registration(regInfo);
+
+        }
     }
 }

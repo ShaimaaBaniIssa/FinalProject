@@ -19,6 +19,7 @@ namespace FinalProject.Core.Data
         public string? Lname { get; set; }
         public string? Email { get; set; }
         public decimal? Phonenumber { get; set; }
+        public string? Address { get; set; }
 
         public virtual ICollection<Login> Logins { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }

@@ -15,6 +15,8 @@ namespace FinalProject.Core.Repository
         void CreateCustomer(Customer customer);
         void UpdateCustomer(Customer customer);
         void DeleteCustomer(int id);
-        void Registration(Registration regInfo);
+        void UpdateLatLong(int id, decimal Latitude, decimal Longitude);
+
+
     }
 }
