@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,21 @@ namespace FinalProject.Infra.Repository
             _dbContext = dbContext;
         }
 
-        public List<Testimonial> GetAllTestimonials()
+        //public List<Testimonial> GetAllTestimonials()
+        //{
+        //    IEnumerable<Testimonial> result = _dbContext.Connection.Query<Testimonial>("Testimonial_Package.GetAllTestimonials", commandType: CommandType.StoredProcedure);
+        //    return result.ToList();
+        //}
+        public List<TestimonialDTO> GetAllTestimonials()
         {
-            IEnumerable<Testimonial> result = _dbContext.Connection.Query<Testimonial>("Testimonial_Package.GetAllTestimonials", commandType: CommandType.StoredProcedure);
+            IEnumerable<TestimonialDTO> result = _dbContext.Connection.Query<TestimonialDTO>("Testimonial_Package.GetAllTestimonials", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
-        public Testimonial GetTestimonialById(int id)
+        public TestimonialDTO GetTestimonialById(int id)
         {
             var p = new DynamicParameters();
             p.Add("Id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = _dbContext.Connection.Query<Testimonial>("Testimonial_Package.GetTestimonialById", p, commandType: CommandType.StoredProcedure);
+            var result = _dbContext.Connection.Query<TestimonialDTO>("Testimonial_Package.GetTestimonialById", p, commandType: CommandType.StoredProcedure);
             return result.SingleOrDefault();
 
         }
@@ -72,5 +78,7 @@ namespace FinalProject.Infra.Repository
 
 
         }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
 using System;
@@ -18,11 +19,11 @@ namespace FinalProject.Infra.Services
         {
             _testimonialRepository = testimonialRepository;
         }
-        public List<Testimonial> GetAllTestimonials()
+        public List<TestimonialDTO> GetAllTestimonials()
         {
            return _testimonialRepository.GetAllTestimonials();
         }
-        public Testimonial GetTestimonialById(int id)
+        public TestimonialDTO GetTestimonialById(int id)
         {
             return _testimonialRepository.GetTestimonialById(id);
 

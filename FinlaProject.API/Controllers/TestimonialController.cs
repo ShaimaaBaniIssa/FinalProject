@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpGet]
-        public List<Testimonial> GetAllTestimonials()
+        public List<TestimonialDTO> GetAllTestimonials()
         {
             return _testimonialServices.GetAllTestimonials();
         }
@@ -25,7 +26,7 @@ namespace FinalProject.API.Controllers
 
         [HttpGet]
         [Route("GetTestimonialById/{id}")]
-        public Testimonial GetTestimonialById(int id)
+        public TestimonialDTO GetTestimonialById(int id)
         {
             return _testimonialServices.GetTestimonialById(id);
 
