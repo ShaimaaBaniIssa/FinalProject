@@ -65,11 +65,13 @@ namespace FinalProject.Infra.Repository
 
             _dbContext.Connection.Execute("TripSchedule_Package.DeleteTripSchedule", p, commandType: CommandType.StoredProcedure);
         }
-        public List<SearchTripDTO> SearchTrip(DateTime tDate)
+        public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
         {
             var p = new DynamicParameters();
-            p.Add("p_TDate", tDate, DbType.DateTime, ParameterDirection.Input);
-            var res = _dbContext.Connection.Query<SearchTripDTO>("SearchTripScheduleByDate", p, commandType: CommandType.StoredProcedure);
+            p.Add("p_StartDate", startDate, DbType.DateTime, ParameterDirection.Input);
+            p.Add("p_EndDate", endDate, DbType.DateTime, ParameterDirection.Input);
+
+            var res = _dbContext.Connection.Query<SearchTripDTO>("SearchTripScheduleByDateRange", p, commandType: CommandType.StoredProcedure);
             return res.ToList();
         }
         public Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour)

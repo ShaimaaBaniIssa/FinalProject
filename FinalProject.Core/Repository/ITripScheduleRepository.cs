@@ -10,7 +10,7 @@ namespace FinalProject.Core.Repository
         void CreateTripSchedule(Tripschedule tripSchedule);
         void UpdateTripSchedule(Tripschedule tripSchedule);
         void DeleteTripSchedule(int id);
-        List<SearchTripDTO> SearchTrip(DateTime tDate);
+        List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate);
         Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour);
         bool CheckTrainAvailabilty(int trainId, DateTime date, string hour);
     }

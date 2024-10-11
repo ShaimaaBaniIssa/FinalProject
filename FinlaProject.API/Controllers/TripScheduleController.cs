@@ -55,9 +55,10 @@ namespace FinalProject.API.Controllers
         }
         [HttpGet]
         [Route("SearchTrip")]
-        public List<SearchTripDTO> SearchTrip(DateTime tDate)
-        {
-            return _tripScheduleService.SearchTrip(tDate);
+        public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
+        { 
+
+            return _tripScheduleService.SearchTrip(startDate, endDate);
         }
         [HttpGet]
         [Route("CheckTripScheduleAvailability")]
