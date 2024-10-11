@@ -41,5 +41,13 @@ namespace FinalProject.Infra.Services
         {
             return _tripScheduleRepository.SearchTrip(tDate);
         }
+        public Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour)
+        {
+            return _tripScheduleRepository.CheckTripScheduleAvailability(tripId, date, hour);
+        }
+        public bool CheckTrainAvailabilty(int trainId, DateTime date, string hour)
+        {
+            return _tripScheduleRepository.CheckTrainAvailabilty(trainId, date, hour);
+        }
     }
 }

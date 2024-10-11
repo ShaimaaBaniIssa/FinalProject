@@ -11,5 +11,7 @@ namespace FinalProject.Core.Repository
         void UpdateTripSchedule(Tripschedule tripSchedule);
         void DeleteTripSchedule(int id);
         List<SearchTripDTO> SearchTrip(DateTime tDate);
+        Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour);
+        bool CheckTrainAvailabilty(int trainId, DateTime date, string hour);
     }
 }
