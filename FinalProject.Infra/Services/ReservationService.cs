@@ -1,8 +1,11 @@
-﻿using FinalProject.Core.Data;
+﻿using Dapper;
+using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Utility;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +54,12 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetInvoice(reservationId);
         }
-      
+        public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year)
+        {
+
+          return _reservationRepository.MonthlyAnnualReports(month, year);
+        }
+
     }
 }
 

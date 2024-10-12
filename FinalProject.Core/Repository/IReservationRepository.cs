@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Utility;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace FinalProject.Core.Repository
         Task<List<Reservation>> GetReservationsWithCustomer();
         List<Reservation> GetReservationByCustId(int custId);
         List<Invoice> GetInvoice(int reservationId);
-       
+        List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year);
+
+
     }
 }

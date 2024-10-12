@@ -121,8 +121,16 @@ namespace FinalProject.API.Controllers
         {
             return _reservationService.GetReservationByCustId(custId);
         }
-        
-       
+
+
+
+        [HttpGet]
+        [Route("MonthlyAnnualReports")]
+        public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year)
+        {
+
+            return _reservationService.MonthlyAnnualReports(month, year);
+        }
 
     }
 

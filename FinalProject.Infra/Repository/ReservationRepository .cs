@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using FinalProject.Core.Common;
 using FinalProject.Core.Data;
+using FinalProject.Core.DTO;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Utility;
 using System;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static QuestPDF.Helpers.Colors;
 
 namespace FinalProject.Infra.Repository
 {
@@ -140,12 +142,21 @@ namespace FinalProject.Infra.Repository
             p.Add("p_reservationId", reservationId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Invoice>("Reservation_Package.GetReservationDetails", p, commandType: CommandType.StoredProcedure);
-
             return result.ToList();
         }
-
+        public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month , int year)
+        {
+            if (month == 0)
+            {
+                month = null;
+            }
+            var p = new DynamicParameters();
+            p.Add("p_month", month,dbType:DbType.Int32,direction:ParameterDirection.Input);
+            p.Add("p_year", year, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<MonthlyAnnualDTO>("Report.MonthlyAnnualReports", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
-
 }
 
 
