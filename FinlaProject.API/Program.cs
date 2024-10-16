@@ -18,6 +18,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDbContext, DbContext>();
+
+builder.Services.AddCors(corsOptions =>
+{
+    corsOptions.AddPolicy("policy",
+    builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 // Repository
 builder.Services.AddScoped<ITrainRepository, TrainRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
