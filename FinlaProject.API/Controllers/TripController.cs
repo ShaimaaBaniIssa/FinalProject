@@ -50,5 +50,11 @@ namespace FinalProject.API.Controllers
         {
             return _tripService.GetTripsWithSchedules();
         }
+        [HttpGet]
+        [Route("GetTripsByStationId/{stationId}")]
+        public List<Trip> GetTripsByStationId(int stationId)
+        {
+            return _tripService.GetTripsByStationId(stationId);
+        }
     }
 }

@@ -102,6 +102,13 @@ namespace FinalProject.Infra.Repository
             return results.ToList();
 
         }
+        public List<Trip> GetTripsByStationId(int stationId)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_station_id", stationId, DbType.Int32, ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Trip>("Trip_Package.GetTripsByStationId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
 
     }
 }

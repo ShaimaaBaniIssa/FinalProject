@@ -10,6 +10,7 @@ namespace FinalProject.Core.Repository
         void UpdateTrip(Trip trip);
         void DeleteTrip(int id);
         Task<List<Trip>> GetTripsWithSchedules();
+        List<Trip> GetTripsByStationId(int stationId);
 
     }
 }

@@ -40,5 +40,9 @@ namespace FinalProject.Infra.Services
         {
             _tripRepository.UpdateTrip(trip);
         }
+        public List<Trip> GetTripsByStationId(int stationId)
+        {
+            return _tripRepository.GetTripsByStationId(stationId);
+        }
     }
 }
