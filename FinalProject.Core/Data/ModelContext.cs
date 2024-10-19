@@ -28,6 +28,13 @@ namespace FinalProject.Core.Data
         public virtual DbSet<Train> Trains { get; set; } = null!;
         public virtual DbSet<Trip> Trips { get; set; } = null!;
         public virtual DbSet<Tripschedule> Tripschedules { get; set; } = null!;
+        public virtual DbSet<Aboutuspage> Aboutuspages { get; set; }
+
+        public virtual DbSet<Contactuspage> Contactuspages { get; set; }
+
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
+
+        public virtual DbSet<Homepage> Homepages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -491,6 +498,178 @@ namespace FinalProject.Core.Data
                     .HasForeignKey(d => d.Tripid)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_TRIP");
+            });
+            modelBuilder.Entity<Aboutuspage>(entity =>
+            {
+                entity.HasKey(e => e.Aboutid).HasName("SYS_C008784");
+
+                entity.ToTable("ABOUTUSPAGE");
+
+                entity.Property(e => e.Aboutid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("ABOUTID");
+                entity.Property(e => e.Aboutimage)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("ABOUTIMAGE");
+                entity.Property(e => e.Abouttext)
+                    .HasMaxLength(350)
+                    .IsUnicode(false)
+                    .HasColumnName("ABOUTTEXT");
+                entity.Property(e => e.Abouttitle)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("ABOUTTITLE");
+                entity.Property(e => e.Img1)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("IMG1");
+                entity.Property(e => e.Img2)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("IMG2");
+                entity.Property(e => e.Img3)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("IMG3");
+                entity.Property(e => e.Pointimg1)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("POINTIMG1");
+                entity.Property(e => e.Pointimg2)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("POINTIMG2");
+                entity.Property(e => e.Pointimg3)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("POINTIMG3");
+            });
+
+            modelBuilder.Entity<Contactuspage>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("SYS_C008782");
+
+                entity.ToTable("CONTACTUSPAGE");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("ID");
+                entity.Property(e => e.Contactformimage)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("CONTACTFORMIMAGE");
+                entity.Property(e => e.Heading)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("HEADING");
+                entity.Property(e => e.Headingimage)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("HEADINGIMAGE");
+                entity.Property(e => e.Icon)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("ICON");
+                entity.Property(e => e.Icontext1)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("ICONTEXT1");
+                entity.Property(e => e.Icontext2)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("ICONTEXT2");
+                entity.Property(e => e.Quotebox)
+                    .HasColumnType("CLOB")
+                    .HasColumnName("QUOTEBOX");
+                entity.Property(e => e.Subheading)
+                    .HasColumnType("CLOB")
+                    .HasColumnName("SUBHEADING");
+            });
+
+            modelBuilder.Entity<Feedback>(entity =>
+            {
+                entity.HasKey(e => e.Feedbackid).HasName("SYS_C008780");
+
+                entity.ToTable("FEEDBACK");
+
+                entity.Property(e => e.Feedbackid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("FEEDBACKID");
+                entity.Property(e => e.Email)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("EMAIL");
+                entity.Property(e => e.Message)
+                    .HasColumnType("CLOB")
+                    .HasColumnName("MESSAGE");
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("NAME");
+            });
+
+            modelBuilder.Entity<Homepage>(entity =>
+            {
+                entity.HasKey(e => e.Homepageid).HasName("SYS_C008778");
+
+                entity.ToTable("HOMEPAGE");
+
+                entity.Property(e => e.Homepageid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("HOMEPAGEID");
+                entity.Property(e => e.Abouttext1)
+                    .HasMaxLength(350)
+                    .IsUnicode(false)
+                    .HasColumnName("ABOUTTEXT1");
+                entity.Property(e => e.Abouttext2)
+                    .HasMaxLength(350)
+                    .IsUnicode(false)
+                    .HasColumnName("ABOUTTEXT2");
+                entity.Property(e => e.Desttext)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("DESTTEXT");
+                entity.Property(e => e.Desttitle)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("DESTTITLE");
+                entity.Property(e => e.Formimage)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("FORMIMAGE");
+                entity.Property(e => e.Logoimage)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("LOGOIMAGE");
+                entity.Property(e => e.Pointabouttext1)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("POINTABOUTTEXT1");
+                entity.Property(e => e.Pointabouttext2)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("POINTABOUTTEXT2");
+                entity.Property(e => e.Titileabouttext)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("TITILEABOUTTEXT");
+                entity.Property(e => e.Toptext)
+                    .HasMaxLength(300)
+                    .IsUnicode(false)
+                    .HasColumnName("TOPTEXT");
+                entity.Property(e => e.Trainlogo)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("TRAINLOGO");
+                entity.Property(e => e.Websitetitle)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("WEBSITETITLE");
             });
 
             OnModelCreatingPartial(modelBuilder);
