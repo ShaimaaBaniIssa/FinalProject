@@ -45,6 +45,7 @@ builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IContactuspageRepository, ContactuspageRepository>();
 builder.Services.AddScoped<IFeedbackRepository,FeedbackRepository>();
 builder.Services.AddScoped<IHomePageRepository, HomePageRepository>();
+builder.Services.AddScoped<IAboutuspageRepository, AboutuspageRepository>();
 
 // db services
 builder.Services.AddScoped<ITrainServices, TrainServices>();
@@ -63,6 +64,8 @@ builder.Services.AddScoped<IReservationService,ReservationService>();
 builder.Services.AddScoped<IContactuspageServices, ContactuspageServices>();
 builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
 builder.Services.AddScoped<IHomePageServices, HomePageServices>();
+builder.Services.AddScoped<IAboutuspageService, AboutuspageService>();
+
 
 // services
 builder.Services.AddScoped<IEmailSender, EmailSender>();
