@@ -9,7 +9,7 @@ namespace FinalProject.Core.Services
 {
     public interface IHomePageServices
     {
-        List<Homepage> GetAllHomePages();
+        Homepage GetHomePage();
         void CreateHomePage(Homepage homepage);
         void UpdateHomePage(Homepage homepage);
     }

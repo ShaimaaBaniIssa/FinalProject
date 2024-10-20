@@ -15,9 +15,9 @@ namespace FinalProject.API.Controllers
             _homePageServices = homePageServices;
         }
         [HttpGet]
-        public List<Homepage> GetAllHomePages()
+        public Homepage GetHomePage()
         {
-            return _homePageServices.GetAllHomePages();
+            return _homePageServices.GetHomePage();
         }
         [HttpPost]
         [Route("CreateHomePage")]

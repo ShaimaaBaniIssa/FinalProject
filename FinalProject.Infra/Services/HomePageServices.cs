@@ -18,9 +18,9 @@ namespace FinalProject.Infra.Services
             _homePageRepository = homePageRepository;
         }
 
-        public List<Homepage> GetAllHomePages()
-        { 
-            return _homePageRepository.GetAllHomePages();
+        public Homepage GetHomePage()
+        {
+            return _homePageRepository.GetHomePage();
         }
 
         public void CreateHomePage(Homepage homepage)

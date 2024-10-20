@@ -19,10 +19,10 @@ namespace FinalProject.Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public List<Homepage> GetAllHomePages()
+        public Homepage GetHomePage()
         {
             var result = _dbContext.Connection.Query<Homepage>("HomePage_Package.GetAllHomePages", commandType: CommandType.StoredProcedure);
-            return result.ToList();
+            return result.FirstOrDefault();
         }
         public void CreateHomePage(Homepage homepage)
         {

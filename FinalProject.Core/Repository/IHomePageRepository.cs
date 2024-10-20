@@ -10,7 +10,7 @@ namespace FinalProject.Core.Repository
 {
     public interface IHomePageRepository
     {
-        List<Homepage> GetAllHomePages();
+        Homepage GetHomePage();
         void CreateHomePage(Homepage homepage);
         void UpdateHomePage(Homepage homepage);
     }
