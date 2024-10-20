@@ -17,7 +17,7 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpGet]
-        public List<Contactuspage> GetAllContactusPages()
+        public Contactuspage GetAllContactusPages()
         {
             return _contactuspageServices.GetAllContactusPages();
         }

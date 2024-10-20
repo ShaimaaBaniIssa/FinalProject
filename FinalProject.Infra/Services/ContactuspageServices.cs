@@ -19,7 +19,7 @@ namespace FinalProject.Infra.Services
         {
             _contactuspageRepository = contactuspageRepository;
         }
-        public List<Contactuspage> GetAllContactusPages()
+        public Contactuspage GetAllContactusPages()
         {
             return _contactuspageRepository.GetAllContactusPages();
         }

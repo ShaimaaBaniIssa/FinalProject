@@ -20,10 +20,10 @@ namespace FinalProject.Infra.Repository
         }
 
         //getAll
-        public List<Contactuspage> GetAllContactusPages() {
+        public Contactuspage GetAllContactusPages() {
 
             var result = _dbContext.Connection.Query<Contactuspage>("ContactusPage_Package.GetAllContactusPages", commandType: CommandType.StoredProcedure);
-            return result.ToList();
+            return result.FirstOrDefault();
         }
 
         public void CreateContactusPage(Contactuspage contactuspage) {

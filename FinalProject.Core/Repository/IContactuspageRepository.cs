@@ -9,7 +9,7 @@ namespace FinalProject.Core.Repository
 {
     public interface IContactuspageRepository
     {
-        List<Contactuspage> GetAllContactusPages();
+        Contactuspage GetAllContactusPages();
         void CreateContactusPage(Contactuspage contactuspage);
         void UpdateContactusPage(Contactuspage contactuspage);
     }
