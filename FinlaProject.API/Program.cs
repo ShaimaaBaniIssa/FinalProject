@@ -42,7 +42,8 @@ builder.Services.AddScoped<ITripScheduleRepository, TripScheduleRepository>();
 builder.Services.AddScoped<IBankCardRepository, BankCardRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-
+builder.Services.AddScoped<IContactuspageRepository, ContactuspageRepository>();
+builder.Services.AddScoped<IFeedbackRepository,FeedbackRepository>();
 
 // db services
 builder.Services.AddScoped<ITrainServices, TrainServices>();
@@ -58,8 +59,8 @@ builder.Services.AddScoped<ITripScheduleService, TripScheduleService>();
 builder.Services.AddScoped<IBankCardService, BankCardService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IReservationService,ReservationService>();
-
-
+builder.Services.AddScoped<IContactuspageServices, ContactuspageServices>();
+builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
 // services
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
