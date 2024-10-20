@@ -561,6 +561,10 @@ namespace FinalProject.Core.Data
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("CONTACTFORMIMAGE");
+                entity.Property(e => e.Email)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("EMAIL");
                 entity.Property(e => e.Heading)
                     .HasMaxLength(255)
                     .IsUnicode(false)
@@ -581,6 +585,10 @@ namespace FinalProject.Core.Data
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("ICONTEXT2");
+                entity.Property(e => e.Phonenumber)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("PHONENUMBER");
                 entity.Property(e => e.Quotebox)
                     .HasColumnType("CLOB")
                     .HasColumnName("QUOTEBOX");

@@ -22,5 +22,8 @@ namespace FinalProject.Core.Data
         public string? Icontext2 { get; set; }
 
         public string? Contactformimage { get; set; }
+        public string? Email { get; set; }
+
+        public string? Phonenumber { get; set; }
     }
 }
