@@ -5,24 +5,24 @@ namespace FinalProject.Core.Data
 {
     public partial class Aboutuspage
     {
-        public decimal AboutId { get; set; }
+        public decimal About_Id { get; set; }
 
-        public string? AboutImage { get; set; }
+        public string? About_Image { get; set; }
 
-        public string? AboutTitle { get; set; }
+        public string? About_Title { get; set; }
 
-        public string? AboutText { get; set; }
+        public string? About_Text { get; set; }
 
-        public string? PointImg1 { get; set; }
+        public string? Point_Img_1 { get; set; }
 
-        public string? Img1 { get; set; }
+        public string? Img_1 { get; set; }
 
-        public string? PointImg2 { get; set; }
+        public string? Point_Img_2 { get; set; }
 
-        public string? Img2 { get; set; }
+        public string? Img_2 { get; set; }
 
-        public string? PointImg3 { get; set; }
+        public string? Point_Img_3 { get; set; }
 
-        public string? Img3 { get; set; }
+        public string? Img_3 { get; set; }
     }
 }

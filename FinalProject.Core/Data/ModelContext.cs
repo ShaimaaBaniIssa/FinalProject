@@ -501,47 +501,47 @@ namespace FinalProject.Core.Data
             });
             modelBuilder.Entity<Aboutuspage>(entity =>
             {
-                entity.HasKey(e => e.AboutId).HasName("SYS_C008786");
+                entity.HasKey(e => e.About_Id).HasName("SYS_C008786");
 
                 entity.ToTable("ABOUTUSPAGE");
 
-                entity.Property(e => e.AboutId)
+                entity.Property(e => e.About_Id)
                     .ValueGeneratedOnAdd()
                     .HasColumnType("NUMBER(38)")
                     .HasColumnName("ABOUT_ID");
-                entity.Property(e => e.AboutImage)
+                entity.Property(e => e.About_Image)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("ABOUT_IMAGE");
-                entity.Property(e => e.AboutText)
+                entity.Property(e => e.About_Text)
                     .HasMaxLength(350)
                     .IsUnicode(false)
                     .HasColumnName("ABOUT_TEXT");
-                entity.Property(e => e.AboutTitle)
+                entity.Property(e => e.About_Title)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("ABOUT_TITLE");
-                entity.Property(e => e.Img1)
+                entity.Property(e => e.Img_1)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("IMG_1");
-                entity.Property(e => e.Img2)
+                entity.Property(e => e.Img_2)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("IMG_2");
-                entity.Property(e => e.Img3)
+                entity.Property(e => e.Img_3)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("IMG_3");
-                entity.Property(e => e.PointImg1)
+                entity.Property(e => e.Point_Img_1)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("POINT_IMG_1");
-                entity.Property(e => e.PointImg2)
+                entity.Property(e => e.Point_Img_2)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("POINT_IMG_2");
-                entity.Property(e => e.PointImg3)
+                entity.Property(e => e.Point_Img_3)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("POINT_IMG_3");

@@ -26,15 +26,15 @@ namespace FinalProject.Infra.Repository
         public void CreateAboutUsPage(Aboutuspage aboutuspage)
         {
             var p = new DynamicParameters();
-            p.Add("p_AboutImage", aboutuspage.AboutImage, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_AboutTitle", aboutuspage.AboutTitle, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_AboutText", aboutuspage.AboutText, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_PointImg1", aboutuspage.PointImg1, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_Img1", aboutuspage.Img1, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_PointImg2", aboutuspage.PointImg2, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_Img2", aboutuspage.Img2, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_PointImg3", aboutuspage.PointImg3, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_Img3", aboutuspage.Img3, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_AboutImage", aboutuspage.About_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_AboutTitle", aboutuspage.About_Title, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_AboutText", aboutuspage.About_Text, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PointImg1", aboutuspage.Point_Img_1, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Img1", aboutuspage.Img_1, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PointImg2", aboutuspage.Point_Img_2, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Img2", aboutuspage.Img_2, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PointImg3", aboutuspage.Point_Img_3, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Img3", aboutuspage.Img_3, dbType: DbType.String, direction: ParameterDirection.Input);
 
             _dbContext.Connection.Execute("Aboutuspage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
 
@@ -42,16 +42,16 @@ namespace FinalProject.Infra.Repository
         public void UpdateAboutUsPage(Aboutuspage aboutuspage)
         {
             var p = new DynamicParameters();
-            p.Add("p_AboutId", aboutuspage.AboutId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("p_AboutImage", aboutuspage.AboutImage, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_AboutTitle", aboutuspage.AboutTitle, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_AboutText", aboutuspage.AboutText, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_PointImg1", aboutuspage.PointImg1, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_Img1", aboutuspage.Img1, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_PointImg2", aboutuspage.PointImg2, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_Img2", aboutuspage.Img2, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_PointImg3", aboutuspage.PointImg3, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_Img3", aboutuspage.Img3, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_AboutId", aboutuspage.About_Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_AboutImage", aboutuspage.About_Image, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_AboutTitle", aboutuspage.About_Title, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_AboutText", aboutuspage.About_Text, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PointImg1", aboutuspage.Point_Img_1, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Img1", aboutuspage.Img_1, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PointImg2", aboutuspage.Point_Img_2, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Img2", aboutuspage.Img_2, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_PointImg3", aboutuspage.Point_Img_3, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Img3", aboutuspage.Img_3, dbType: DbType.String, direction: ParameterDirection.Input);
 
             _dbContext.Connection.Execute("Aboutuspage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
 
