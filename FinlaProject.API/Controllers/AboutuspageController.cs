@@ -16,9 +16,9 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpGet]
-        public List<Aboutuspage> GetAllAboutUsPages()
+        public Aboutuspage GetAllAboutPages()
         {
-            return _aboutuspageService.GetAllAboutUsPages();
+            return _aboutuspageService.GetAllAboutPages();
         }
 
 

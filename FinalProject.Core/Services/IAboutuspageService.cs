@@ -9,7 +9,7 @@ namespace FinalProject.Core.Services
 {
     public interface IAboutuspageService
     {
-        List<Aboutuspage> GetAllAboutUsPages();
+        Aboutuspage GetAllAboutPages();
         void CreateAboutUsPage(Aboutuspage aboutuspage);
         void UpdateAboutUsPage(Aboutuspage aboutuspage);
     }

@@ -18,11 +18,10 @@ namespace FinalProject.Infra.Repository
         {
             _dbContext = dbContext;
         }
-        public List<Aboutuspage> GetAllAboutUsPages()
+        public Aboutuspage  GetAllAboutPages()
         {
-
-            var result = _dbContext.Connection.Query<Aboutuspage>("AboutUsPage_Package.GetAllAboutUsPages", commandType: CommandType.StoredProcedure);
-            return result.ToList();
+            var result = _dbContext.Connection.Query<Aboutuspage>("Aboutuspage_Package.GetAllAboutPages", commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
         }
         public void CreateAboutUsPage(Aboutuspage aboutuspage)
         {
@@ -37,7 +36,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_PointImg3", aboutuspage.Pointimg3, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_Img3", aboutuspage.Img3, dbType: DbType.String, direction: ParameterDirection.Input);
 
-            _dbContext.Connection.Execute("AboutUsPage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
+            _dbContext.Connection.Execute("Aboutuspage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
 
         }
         public void UpdateAboutUsPage(Aboutuspage aboutuspage)
@@ -54,7 +53,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_PointImg3", aboutuspage.Pointimg3, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_Img3", aboutuspage.Img3, dbType: DbType.String, direction: ParameterDirection.Input);
 
-            _dbContext.Connection.Execute("AboutUsPage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
+            _dbContext.Connection.Execute("Aboutuspage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
 
         }
 

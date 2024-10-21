@@ -16,9 +16,9 @@ namespace FinalProject.Infra.Services
         {
             _aboutuspageRepository = aboutuspageRepository;
         }
-        public List<Aboutuspage> GetAllAboutUsPages()
+        public Aboutuspage GetAllAboutPages()
         {
-            return _aboutuspageRepository.GetAllAboutUsPages();
+            return _aboutuspageRepository.GetAllAboutPages();
         }
 
         public void CreateAboutUsPage(Aboutuspage aboutuspage)
