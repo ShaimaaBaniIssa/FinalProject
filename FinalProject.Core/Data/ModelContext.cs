@@ -501,50 +501,50 @@ namespace FinalProject.Core.Data
             });
             modelBuilder.Entity<Aboutuspage>(entity =>
             {
-                entity.HasKey(e => e.Aboutid).HasName("SYS_C008784");
+                entity.HasKey(e => e.AboutId).HasName("SYS_C008786");
 
                 entity.ToTable("ABOUTUSPAGE");
 
-                entity.Property(e => e.Aboutid)
+                entity.Property(e => e.AboutId)
                     .ValueGeneratedOnAdd()
                     .HasColumnType("NUMBER(38)")
-                    .HasColumnName("ABOUTID");
-                entity.Property(e => e.Aboutimage)
+                    .HasColumnName("ABOUT_ID");
+                entity.Property(e => e.AboutImage)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("ABOUTIMAGE");
-                entity.Property(e => e.Abouttext)
+                    .HasColumnName("ABOUT_IMAGE");
+                entity.Property(e => e.AboutText)
                     .HasMaxLength(350)
                     .IsUnicode(false)
-                    .HasColumnName("ABOUTTEXT");
-                entity.Property(e => e.Abouttitle)
+                    .HasColumnName("ABOUT_TEXT");
+                entity.Property(e => e.AboutTitle)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("ABOUTTITLE");
+                    .HasColumnName("ABOUT_TITLE");
                 entity.Property(e => e.Img1)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("IMG1");
+                    .HasColumnName("IMG_1");
                 entity.Property(e => e.Img2)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("IMG2");
+                    .HasColumnName("IMG_2");
                 entity.Property(e => e.Img3)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("IMG3");
-                entity.Property(e => e.Pointimg1)
+                    .HasColumnName("IMG_3");
+                entity.Property(e => e.PointImg1)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("POINTIMG1");
-                entity.Property(e => e.Pointimg2)
+                    .HasColumnName("POINT_IMG_1");
+                entity.Property(e => e.PointImg2)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("POINTIMG2");
-                entity.Property(e => e.Pointimg3)
+                    .HasColumnName("POINT_IMG_2");
+                entity.Property(e => e.PointImg3)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("POINTIMG3");
+                    .HasColumnName("POINT_IMG_3");
             });
 
             modelBuilder.Entity<Contactuspage>(entity =>
