@@ -58,7 +58,9 @@ namespace FinalProject.Infra.Services
                 var claims = new List<Claim>
              {
              new Claim(ClaimTypes.Name, result.Username),
-             new Claim(ClaimTypes.Role, result.Roleid.ToString())
+             new Claim(ClaimTypes.Role, result.Roleid.ToString()),
+             new Claim("customerid", result.Customerid.ToString())
+
              };
 
                 var tokeOptions = new JwtSecurityToken(

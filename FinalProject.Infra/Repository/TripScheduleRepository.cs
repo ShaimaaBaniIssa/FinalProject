@@ -74,14 +74,14 @@ namespace FinalProject.Infra.Repository
             var res = _dbContext.Connection.Query<SearchTripDTO>("SearchTripScheduleByDateRange", p, commandType: CommandType.StoredProcedure);
             return res.ToList();
         }
-        public Tripschedule CheckTripScheduleAvailability(int tripId, DateTime date, string hour)
+        public List<Tripschedule> CheckTripScheduleAvailability(int tripId, DateTime date)
         {
             var p = new DynamicParameters();
             p.Add("p_tripid", tripId, DbType.Int32, ParameterDirection.Input);
             p.Add("p_date", date, DbType.DateTime, ParameterDirection.Input);
-            p.Add("p_time", hour, DbType.String, ParameterDirection.Input);
+            //p.Add("p_time", hour, DbType.String, ParameterDirection.Input);
             var result = _dbContext.Connection.Query<Tripschedule>("TripSchedule_Package.CheckTripScheduleAvailability", p, commandType: CommandType.StoredProcedure);
-            return result.SingleOrDefault();
+            return result.ToList();
         }
         public bool CheckTrainAvailabilty(int trainId, DateTime date, string hour)
         {

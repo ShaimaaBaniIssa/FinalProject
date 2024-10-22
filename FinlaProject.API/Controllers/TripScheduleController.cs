@@ -61,8 +61,8 @@ namespace FinalProject.API.Controllers
             return _tripScheduleService.SearchTrip(startDate, endDate);
         }
         [HttpGet]
-        [Route("CheckTripScheduleAvailability")]
-        public AvailableTripScheduleDTO CheckTripScheduleAvailability(int tripId, DateTime reservationDate, string hour)
+        [Route("CheckTripScheduleAvailability/{tripId}/{reservationDate}")]
+        public List<Tripschedule> CheckTripScheduleAvailability(int tripId, DateTime reservationDate)
         {
             // check tripschedule 
             // tripid, date, time
@@ -88,14 +88,18 @@ namespace FinalProject.API.Controllers
                 availableDay = true;
             else if (trip.Friday.Value && dateName.Equals(DayOfWeek.Friday))
                 availableDay = true;
-            // check date, time , tripid
-            var tripschedule = _tripScheduleService.CheckTripScheduleAvailability(tripId, reservationDate, hour);
-            var result = _seatServices.GetTripScheduleSeats((int)tripschedule.Tripscheduleid);
-            return new AvailableTripScheduleDTO
-            {
-                Seats = result.ToList(),
-                TripScheduleId = (int)tripschedule.Tripscheduleid
-            };
+           
+            return _tripScheduleService.CheckTripScheduleAvailability(tripId, reservationDate);
         }
+        [HttpGet]
+        [Route("GetAvailableSeats/{tripScheduleId}")]
+        public List<Seat> GetAvailableSeats(int tripScheduleId)
+        {
+            
+            var result = _seatServices.GetTripScheduleSeats(tripScheduleId);
+            return result.ToList();
+           
+        }
+
     }
 }
