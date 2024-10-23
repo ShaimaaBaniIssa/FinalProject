@@ -270,11 +270,11 @@ namespace FinalProject.Core.Data
                     .HasColumnName("IMAGEPATH");
 
                 entity.Property(e => e.Latitude)
-                    .HasColumnType("NUMBER(38)")
+                    .HasColumnType("FLOAT")
                     .HasColumnName("LATITUDE");
 
                 entity.Property(e => e.Longitude)
-                    .HasColumnType("NUMBER(38)")
+                    .HasColumnType("FLOAT")
                     .HasColumnName("LONGITUDE");
 
                 entity.Property(e => e.Stationname)
