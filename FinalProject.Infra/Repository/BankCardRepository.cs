@@ -26,9 +26,9 @@ namespace FinalProject.Infra.Repository
             p.Add("p_cardNumber", cardNumber, dbType: DbType.String, direction: ParameterDirection.Input);
 
             p.Add("p_balance", balance, dbType: DbType.Decimal, direction: ParameterDirection.Input);
-
-
-            _dbContext.Connection.Execute("BankCard_Package.UpdateBalance", p, commandType: CommandType.StoredProcedure);
+          
+                _dbContext.Connection.Execute("BankCard_Package.UpdateBalance", p, commandType: CommandType.StoredProcedure);
+          
 
         }
 
@@ -39,9 +39,9 @@ namespace FinalProject.Infra.Repository
             var p = new DynamicParameters(); 
 
             p.Add("p_cardNumber", bankcard.Cardnumber, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_cardHolder", bankcard.Cardnumber, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_cardCVV", bankcard.Cardnumber, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("p_cardType", bankcard.Cardnumber, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_cardHolder", bankcard.Cardholdername, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_cardCVV", bankcard.Cvv, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_cardType", bankcard.Cardtype, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_expiryDate", bankcard.Expirydate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Bankcard>("BankCard_Package.ValidateBankCard", p, commandType: CommandType.StoredProcedure);

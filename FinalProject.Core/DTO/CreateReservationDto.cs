@@ -17,5 +17,6 @@ namespace FinalProject.Core.DTO
         public DateTime reservationDate { get; set; }
 
         public List<Ticket> tickets { get; set; }
+        public Bankcard bankcard { get; set; }
     }
 }

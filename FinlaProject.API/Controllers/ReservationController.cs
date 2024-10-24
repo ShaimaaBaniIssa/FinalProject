@@ -21,10 +21,11 @@ namespace FinalProject.API.Controllers
         private readonly ITripScheduleService _tripScheduleService;
         private readonly ITicketService _ticketService;
         private readonly ITripService _tripService;
+        private readonly IBankCardService _bankCardService;
         public ReservationController(IReservationService reservationService, IPdfGenerator pdfGenerator, IEmailSender emailSender, 
             ICustomerService customerService,ITripScheduleService tripScheduleService,
             ITicketService ticketService,
-            ITripService tripService)
+            ITripService tripService,IBankCardService bankCardService)
         {
             _reservationService = reservationService;
             _pdfGenerator = pdfGenerator;
@@ -33,6 +34,7 @@ namespace FinalProject.API.Controllers
             _tripScheduleService = tripScheduleService;
             _ticketService = ticketService;
             _tripService = tripService;
+            _bankCardService = bankCardService;
         }
         [HttpGet]
         public List<Reservation> GetAllReservations()
@@ -45,13 +47,12 @@ namespace FinalProject.API.Controllers
         {
             return _reservationService.GetReservationById(id);
         }
+       
         [HttpPost]
         [Route("CreateReservation")]
-        public void CreateReservation([FromBody] CreateReservationDto createReservationDto)
+        public IActionResult CreateReservation([FromBody] CreateReservationDto createReservationDto
+            )
         {
-            // date,time ... checked before
-
-
             //  procedure tripscheduleId ,, trip
             var trip = _tripService.GetTripById(createReservationDto.tripId);
 
@@ -62,7 +63,11 @@ namespace FinalProject.API.Controllers
 
 
             // payment 
+            if(!_bankCardService.Pay(createReservationDto.bankcard, price))
+            {
+                return BadRequest("Invalid Card");
 
+            }
             // create reservation and return the id
             int reservationId = _reservationService.CreateReservation(
                 new Reservation
@@ -95,6 +100,8 @@ namespace FinalProject.API.Controllers
                    $"Train Ticket",
                    pdf);
             }
+            return Ok();
+
         }
         [HttpPut]
 

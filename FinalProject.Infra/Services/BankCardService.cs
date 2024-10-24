@@ -26,7 +26,7 @@ namespace FinalProject.Infra.Services
         {
             _bankCardRepository.UpdateBalance(cardNumber, balance);
         }
-        public bool Pay(Bankcard bankcard, decimal price, int reservationId)
+        public bool Pay(Bankcard bankcard, decimal price)
         {
             var card = ValidateBankCard(bankcard);
             if (card == null) return false;

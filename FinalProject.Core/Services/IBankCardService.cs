@@ -11,5 +11,7 @@ namespace FinalProject.Core.Services
     {
         Bankcard ValidateBankCard(Bankcard bankcard);
         void UpdateBalance(string cardNumber, decimal balance);
+        bool Pay(Bankcard bankcard, decimal price);
+        
     }
 }
