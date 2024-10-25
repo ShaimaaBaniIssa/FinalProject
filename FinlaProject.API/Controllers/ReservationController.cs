@@ -22,10 +22,12 @@ namespace FinalProject.API.Controllers
         private readonly ITicketService _ticketService;
         private readonly ITripService _tripService;
         private readonly IBankCardService _bankCardService;
+        private readonly ISeatServices _seatServices;
         public ReservationController(IReservationService reservationService, IPdfGenerator pdfGenerator, IEmailSender emailSender, 
             ICustomerService customerService,ITripScheduleService tripScheduleService,
             ITicketService ticketService,
-            ITripService tripService,IBankCardService bankCardService)
+            ITripService tripService,IBankCardService bankCardService,
+            ISeatServices seatServices)
         {
             _reservationService = reservationService;
             _pdfGenerator = pdfGenerator;
@@ -35,6 +37,7 @@ namespace FinalProject.API.Controllers
             _ticketService = ticketService;
             _tripService = tripService;
             _bankCardService = bankCardService;
+            _seatServices = seatServices;
         }
         [HttpGet]
         public List<Reservation> GetAllReservations()
@@ -83,6 +86,9 @@ namespace FinalProject.API.Controllers
             {
                 ticket.Reservationid = reservationId;
                 _ticketService.CreateTicket(ticket);
+                // reserve seat
+                _seatServices.ReserveSeat((int)ticket.Seatid, createReservationDto.tripScheduleId);
+
             }
 
             // get invoices info

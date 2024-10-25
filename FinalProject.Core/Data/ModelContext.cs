@@ -35,6 +35,7 @@ namespace FinalProject.Core.Data
         public virtual DbSet<Feedback> Feedbacks { get; set; }
 
         public virtual DbSet<Homepage> Homepages { get; set; }
+        public virtual DbSet<Seatstripschedule> Seatstripschedules { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -679,6 +680,20 @@ namespace FinalProject.Core.Data
                     .IsUnicode(false)
                     .HasColumnName("WEBSITETITLE");
             });
+            modelBuilder.Entity<Seatstripschedule>(entity =>
+            {
+                entity.HasKey(e => new { e.Seatid, e.Tripscheduleid }).HasName("SYS_C008795");
+
+                entity.ToTable("SEATSTRIPSCHEDULES");
+
+                entity.Property(e => e.Seatid)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("SEATID");
+                entity.Property(e => e.Tripscheduleid)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("TRIPSCHEDULEID");
+            });
+
 
             OnModelCreatingPartial(modelBuilder);
         }

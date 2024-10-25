@@ -109,11 +109,11 @@ namespace FinalProject.Infra.Repository
                 return res;
             }
         }
-        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
+        public int CountUser()
         {
 
-            IEnumerable<UserCountDTO> result = _dbContext.Connection.Query<UserCountDTO>("GetTotalUsers", commandType: CommandType.StoredProcedure);
-            return result.ToList();
+            var result = _dbContext.Connection.Query<int>("Report.GetTotalUsers", commandType: CommandType.StoredProcedure);
+            return result.SingleOrDefault();
         }
 
         public void Registration(Registration regInfo)

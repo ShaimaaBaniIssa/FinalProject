@@ -12,6 +12,6 @@ namespace FinalProject.Core.Repository
         void DeleteStation(int id);
         Task<List<Station>> GetStationsWithTrips();
         List<SearchStationDTO> SearchStation(string staionName);
-        List<StationCountDTO> StationCount(StationCountDTO stationCountDTO);
+       int StationCount();
     }
 }

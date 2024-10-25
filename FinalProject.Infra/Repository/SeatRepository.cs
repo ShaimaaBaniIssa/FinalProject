@@ -70,22 +70,51 @@ namespace FinalProject.Infra.Repository
             var result = _dbContext.Connection.Execute("Seat_Package.DeleteSeat", p, commandType: CommandType.StoredProcedure);
 
         }
+        //public List<Seat> GetTripScheduleSeats(int tripScheduleId)
+        //{
+        //    var p = new DynamicParameters();
+        //    p.Add("S_tripscheduleid", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+        //    IEnumerable<Seat> result = _dbContext.Connection.Query<Seat>("Seat_Package.GetTrainSeats", p, commandType: CommandType.StoredProcedure);
+        //    return result.ToList();
+
+        //}
+        //public void UpdateSeatAvailability(int seatId)
+        //{
+        //    var pSeat = new DynamicParameters();
+        //    pSeat.Add("p_seatId", seatId, DbType.Int32, ParameterDirection.Input);
+        //    pSeat.Add("p_availability", 0, DbType.Int32, ParameterDirection.Input);
+
+        //    _dbContext.Connection.Execute("Seat_Package.UpdateSeatAvailability", pSeat, commandType: CommandType.StoredProcedure);
+
+
+        //}
+
         public List<Seat> GetTripScheduleSeats(int tripScheduleId)
         {
             var p = new DynamicParameters();
-            p.Add("S_tripscheduleid", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<Seat> result = _dbContext.Connection.Query<Seat>("Seat_Package.GetTrainSeats", p, commandType: CommandType.StoredProcedure);
+            p.Add("p_tripschedule_id", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<Seat> result = _dbContext.Connection.Query<Seat>("Seat_Package.GetAvailableSeatsForTripSchedule", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
 
         }
-        public void UpdateSeatAvailability(int seatId)
+        public void ReserveSeat(int seatId , int tripScheduleId)
         {
-            var pSeat = new DynamicParameters();
-            pSeat.Add("p_seatId", seatId, DbType.Int32, ParameterDirection.Input);
-            pSeat.Add("p_availability", 0, DbType.Int32, ParameterDirection.Input);
+            var p = new DynamicParameters();
+            p.Add("p_seat_id", seatId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_tripschedule_id", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            _dbContext.Connection.Execute("Seat_Package.UpdateSeatAvailability", pSeat, commandType: CommandType.StoredProcedure);
 
+            _dbContext.Connection.Execute("Seat_Package.AddSeatToTripSchedule", p, commandType: CommandType.StoredProcedure);
+
+        }
+        public void RemoveReservedSeat(int seatId, int tripScheduleId)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_seat_id", seatId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_tripschedule_id", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+
+            _dbContext.Connection.Execute("Seat_Package.RemoveSeatFromTripSchedule", p, commandType: CommandType.StoredProcedure);
 
         }
 

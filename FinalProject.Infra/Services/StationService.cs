@@ -47,9 +47,9 @@ namespace FinalProject.Infra.Services
         {
             return _stationRepository.SearchStation(staionName);
         }
-        public List<StationCountDTO> StationCount(StationCountDTO stationCountDTO)
+        public int StationCount()
         {
-            return _stationRepository.StationCount(stationCountDTO);
+            return _stationRepository.StationCount();
         }
     }
 }

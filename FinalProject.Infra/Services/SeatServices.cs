@@ -39,5 +39,13 @@ namespace FinalProject.Infra.Services
         {
             return _seatRepository.GetTripScheduleSeats(tripScheduleId);
         }
+        public void ReserveSeat(int seatId, int tripScheduleId)
+        {
+            _seatRepository.ReserveSeat(seatId, tripScheduleId);
+        }
+        public void RemoveReservedSeat(int seatId, int tripScheduleId)
+        {
+            _seatRepository.RemoveReservedSeat(seatId, tripScheduleId);
+        }
     }
 }

@@ -73,9 +73,9 @@ namespace FinalProject.Infra.Services
 
             }
         }
-        public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
+        public int CountUser()
         {
-            return _loginRepository.CountUser(userCountDTO);
+            return _loginRepository.CountUser();
         }
 
         public void Registration(Registration regInfo)
