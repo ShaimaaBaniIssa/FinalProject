@@ -75,7 +75,7 @@ namespace FinalProject.API.Controllers
             return _stationService.SearchStation(staionName);
         }
         [HttpGet]
-        [Route("CountCustomer")]
+        [Route("StationCount")]
         public List<StationCountDTO> StationCount(StationCountDTO stationCountDTO)
         {
             return _stationService.StationCount(stationCountDTO);

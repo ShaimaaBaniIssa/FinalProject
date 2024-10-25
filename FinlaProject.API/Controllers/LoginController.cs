@@ -63,7 +63,7 @@ namespace FinalProject.API.Controllers
 
         }
         [HttpGet]
-        [Route("CountCustomer")]
+        [Route("CountUser")]
         public List<UserCountDTO> CountUser(UserCountDTO userCountDTO)
         {
             return _loginService.CountUser(userCountDTO);
