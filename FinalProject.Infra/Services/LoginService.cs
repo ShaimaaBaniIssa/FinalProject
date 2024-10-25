@@ -57,8 +57,8 @@ namespace FinalProject.Infra.Services
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var claims = new List<Claim>
              {
-             new Claim(ClaimTypes.Name, result.Username),
-             new Claim(ClaimTypes.Role, result.Roleid.ToString()),
+             new Claim("name", result.Username),
+             new Claim("role", result.Roleid.ToString()),
              new Claim("customerid", result.Customerid.ToString())
 
              };
