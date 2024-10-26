@@ -69,7 +69,7 @@ namespace FinalProject.API.Controllers
 
 
         [HttpGet]
-        [Route("SearchStation")]
+        [Route("SearchStation/{staionName}")]
         public List<SearchStationDTO> SearchStation(string staionName)
         {
             return _stationService.SearchStation(staionName);

@@ -112,7 +112,7 @@ namespace FinalProject.Infra.Repository
         {
             var p = new DynamicParameters();
             p.Add("S_Name", staionName, DbType.String, ParameterDirection.Input);
-            var res = _dbContext.Connection.Query<SearchStationDTO>("SearchStation",p,commandType:CommandType.StoredProcedure);
+            var res = _dbContext.Connection.Query<SearchStationDTO>("Station_Package.SearchStation", p,commandType:CommandType.StoredProcedure);
             return res.ToList();
         }
     }
