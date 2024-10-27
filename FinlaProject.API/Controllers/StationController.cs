@@ -34,7 +34,7 @@ namespace FinalProject.API.Controllers
             _stationService.CreateStation(station);
         }
         [HttpPut]
-        [Route("CreateStation")]
+        [Route("UpdateStation")]
         public void UpdateStation(Station station)
         {
             _stationService.UpdateStation(station);
