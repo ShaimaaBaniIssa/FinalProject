@@ -61,16 +61,11 @@ namespace FinalProject.API.Controllers
             return _tripScheduleService.SearchTrip(startDate, endDate);
         }
         [HttpGet]
-        [Route("CheckTripScheduleAvailability/{tripId}/{reservationDate}")]
-        public List<Tripschedule> CheckTripScheduleAvailability(int tripId, DateTime reservationDate)
+        [Route("CheckTripScheduleAvailability/{tripId}/{tripScheduleDate}")]
+        public bool CheckTripScheduleAvailability(int tripId, DateTime tripScheduleDate)
         {
-            // check tripschedule 
-            // tripid, date, time
-            // available (train 
-            // check if the reservation date 
-            // List<seat>
-            // 1. match trip days
-            var dateName = reservationDate.DayOfWeek.ToString();
+  
+            var dateName = tripScheduleDate.DayOfWeek.ToString();
             var trip = _tripService.GetTripById(tripId);
             bool availableDay = false;
             // check day
@@ -86,10 +81,10 @@ namespace FinalProject.API.Controllers
                 availableDay = true;
             else if (trip.Thursday.Value && dateName.Equals(DayOfWeek.Thursday))
                 availableDay = true;
-            else if (trip.Friday.Value && dateName.Equals(DayOfWeek.Friday))
+            else if (trip.Friday.Value && dateName.Equals(DayOfWeek.Friday.ToString()))
                 availableDay = true;
            
-            return _tripScheduleService.CheckTripScheduleAvailability(tripId, reservationDate);
+            return availableDay;
         }
         [HttpGet]
         [Route("GetAvailableSeats/{tripScheduleId}")]

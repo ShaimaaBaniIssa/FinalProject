@@ -71,7 +71,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_StartDate", startDate, DbType.DateTime, ParameterDirection.Input);
             p.Add("p_EndDate", endDate, DbType.DateTime, ParameterDirection.Input);
 
-            var res = _dbContext.Connection.Query<SearchTripDTO>("SearchTripScheduleByDateRange", p, commandType: CommandType.StoredProcedure);
+            var res = _dbContext.Connection.Query<SearchTripDTO>("Report.SearchTripScheduleByDateRange", p, commandType: CommandType.StoredProcedure);
             return res.ToList();
         }
         public List<Tripschedule> CheckTripScheduleAvailability(int tripId, DateTime date)
