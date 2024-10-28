@@ -45,8 +45,8 @@ namespace FinalProject.API.Controllers
             }
         }
         [HttpPut]
-        [Route("CreateStation")]
-        public void UpdateStation(Station station)
+        [Route("UpdateStation")]
+        public ActionResult UpdateStation(Station station)
         {
             try
             {
