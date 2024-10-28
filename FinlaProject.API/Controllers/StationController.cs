@@ -29,21 +29,53 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("CreateStation")]
-        public void CreateStation(Station station)
+        public ActionResult CreateStation(Station station)
         {
-            _stationService.CreateStation(station);
+            try
+            {
+                _stationService.CreateStation(station);
+                return Ok();
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+
+            }
         }
         [HttpPut]
-        [Route("CreateStation")]
-        public void UpdateStation(Station station)
+        [Route("UpdateStation")]
+        public ActionResult UpdateStation(Station station)
         {
-            _stationService.UpdateStation(station);
+            try
+            {
+                _stationService.UpdateStation(station);
+                return Ok();
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+
+            }
         }
         [HttpDelete]
         [Route("DeleteStation/{id}")]
-        public void DeleteStation(int id)
+        public ActionResult DeleteStation(int id)
         {
-            _stationService?.DeleteStation(id); 
+            try
+            {
+                _stationService?.DeleteStation(id);
+                return Ok();
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();            
+            }
         }
         [Route("UploadImage")]
         [HttpPost]

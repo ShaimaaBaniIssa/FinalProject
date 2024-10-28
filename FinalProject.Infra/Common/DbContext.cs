@@ -32,7 +32,7 @@ namespace FinalProject.Infra.Common
                 {
                     _connection = new OracleConnection(_configuration["ConnectionStrings:DBConnectionString"]);
 
-                    _connection.Open();
+                        _connection.Open();
                 }
                 else if (_connection.State != ConnectionState.Open)
                 {
