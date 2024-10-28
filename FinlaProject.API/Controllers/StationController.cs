@@ -12,9 +12,12 @@ namespace FinalProject.API.Controllers
     public class StationController : ControllerBase
     {
         private readonly IStationService _stationService;
-        public StationController(IStationService stationService)
+        private readonly IConfiguration _configuration;
+
+        public StationController(IStationService stationService, IConfiguration configuration)
         {
             _stationService = stationService;
+            _configuration = configuration;
         }
         [HttpGet]
         public List<Station> GetAllStations()
@@ -83,7 +86,8 @@ namespace FinalProject.API.Controllers
         {
             var file = Request.Form.Files[0];
             var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-            var fullPath = Path.Combine("C:\\Work\\training\\final_project\\src\\assets\\Admin\\img", fileName);
+            var imageFolderPath = _configuration["ImageFolderPath"];
+            var fullPath = Path.Combine(imageFolderPath, fileName);
             using (var stream = new FileStream(fullPath, FileMode.Create))
             {
                 file.CopyTo(stream);
