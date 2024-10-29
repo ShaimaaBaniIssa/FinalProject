@@ -43,7 +43,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_Friday", trip.Friday, DbType.Int32, ParameterDirection.Input);
             p.Add("p_Saturday", trip.Saturday, DbType.Int32, ParameterDirection.Input);
             p.Add("p_StationId", trip.Stationid, DbType.Int32, ParameterDirection.Input);
-
+            p.Add("p_destadress", trip.Destaddress, DbType.String, ParameterDirection.Input);
             _dbContext.Connection.Execute("Trip_Package.CreateTrip", p, commandType: CommandType.StoredProcedure);
         }
 
@@ -62,6 +62,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_Friday", trip.Friday, DbType.Int32, ParameterDirection.Input);
             p.Add("p_Saturday", trip.Saturday, DbType.Int32, ParameterDirection.Input);
             p.Add("p_StationId", trip.Stationid, DbType.Int32, ParameterDirection.Input);
+            p.Add("p_destadress", trip.Destaddress, DbType.String, ParameterDirection.Input);
 
             _dbContext.Connection.Execute("Trip_Package.UpdateTrip", p, commandType: CommandType.StoredProcedure);
         }
