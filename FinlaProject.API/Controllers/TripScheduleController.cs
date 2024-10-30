@@ -64,26 +64,26 @@ namespace FinalProject.API.Controllers
         [Route("CheckTripScheduleAvailability/{tripId}/{tripScheduleDate}")]
         public bool CheckTripScheduleAvailability(int tripId, DateTime tripScheduleDate)
         {
-  
+
             var dateName = tripScheduleDate.DayOfWeek.ToString();
             var trip = _tripService.GetTripById(tripId);
             bool availableDay = false;
             // check day
-            if (trip.Saturday.Value && dateName.Equals(DayOfWeek.Saturday))
+            if (trip.Saturday ?? false && dateName.Equals(DayOfWeek.Saturday))
                 availableDay = true;
-            else if (trip.Sunday.Value && dateName.Equals(DayOfWeek.Sunday))
+            else if (trip.Sunday ?? false && dateName.Equals(DayOfWeek.Sunday))
                 availableDay = true;
-            else if (trip.Monday.Value && dateName.Equals(DayOfWeek.Monday))
+            else if (trip.Monday ?? false && dateName.Equals(DayOfWeek.Monday))
                 availableDay = true;
-            else if (trip.Tuesday.Value && dateName.Equals(DayOfWeek.Tuesday))
+            else if (trip.Tuesday ?? false && dateName.Equals(DayOfWeek.Tuesday))
                 availableDay = true;
-            else if (trip.Wednesday.Value && dateName.Equals(DayOfWeek.Wednesday))
+            else if (trip.Wednesday ?? false && dateName.Equals(DayOfWeek.Wednesday))
                 availableDay = true;
-            else if (trip.Thursday.Value && dateName.Equals(DayOfWeek.Thursday))
+            else if (trip.Thursday ?? false && dateName.Equals(DayOfWeek.Thursday))
                 availableDay = true;
-            else if (trip.Friday.Value && dateName.Equals(DayOfWeek.Friday.ToString()))
+            else if (trip.Friday ?? false && dateName.Equals(DayOfWeek.Friday.ToString()))
                 availableDay = true;
-           
+
             return availableDay;
         }
         [HttpGet]
