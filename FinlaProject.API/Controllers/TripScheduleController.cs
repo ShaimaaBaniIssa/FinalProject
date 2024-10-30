@@ -96,10 +96,10 @@ namespace FinalProject.API.Controllers
            
         }
         [HttpGet]
-        [Route("GetTripScheduleById/{id}")]
-        public Tripschedule GetTripScheduleByTripId(int tripId)
+        [Route("GetTripScheduleByTripId/{id}")]
+        public List<Tripschedule> GetTripScheduleByTripId(int id)
         {
-            return _tripScheduleService.GetTripScheduleByTripId(tripId);
+            return _tripScheduleService.GetTripScheduleByTripId(id);
         }
     }
 }

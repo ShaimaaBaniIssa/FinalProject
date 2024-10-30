@@ -13,7 +13,7 @@ namespace FinalProject.Core.Services
         List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate);
         List<Tripschedule> CheckTripScheduleAvailability(int tripId, DateTime date);
             bool CheckTrainAvailabilty(int trainId, DateTime date, string hour);
-        Tripschedule GetTripScheduleByTripId(int tripId);
+        List<Tripschedule> GetTripScheduleByTripId(int tripId);
 
     }
 }

@@ -96,12 +96,12 @@ namespace FinalProject.Infra.Repository
 
             return count == 0 ? true : false;
         }
-        public Tripschedule GetTripScheduleByTripId(int tripId)
+        public List<Tripschedule> GetTripScheduleByTripId(int tripId)
         {
             var p = new DynamicParameters();
             p.Add("p_TripId", tripId, DbType.Int32, ParameterDirection.Input);
             var result = _dbContext.Connection.Query<Tripschedule>("TripSchedule_Package.GetTripScheduleByTripId", p, commandType: CommandType.StoredProcedure);
-            return result.SingleOrDefault();
+            return result.ToList();
         }
     }
 }
