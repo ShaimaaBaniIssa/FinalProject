@@ -95,6 +95,11 @@ namespace FinalProject.API.Controllers
             return result.ToList();
            
         }
-
+        [HttpGet]
+        [Route("GetTripScheduleById/{id}")]
+        public Tripschedule GetTripScheduleByTripId(int tripId)
+        {
+            return _tripScheduleService.GetTripScheduleByTripId(tripId);
+        }
     }
 }

@@ -49,5 +49,10 @@ namespace FinalProject.Infra.Services
         {
             return _tripScheduleRepository.CheckTrainAvailabilty(trainId, date, hour);
         }
+        public Tripschedule GetTripScheduleByTripId(int tripId)
+        {
+            return _tripScheduleRepository.GetTripScheduleByTripId(tripId);
+        }
+
     }
 }
