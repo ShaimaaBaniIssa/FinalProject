@@ -101,15 +101,13 @@ namespace FinalProject.API.Controllers
             // generate pdf
             foreach (var invoice in invoices)
             {
-                //var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+                var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
 
-                //// send it to the user
-                //_emailSender.SendEmail(customer.Email, "Booking Invoice",
-                //   $"Train Ticket",
-                //   pdf);
+                // send it to the user
+                _emailSender.SendEmail(customer.Email, "Booking Invoice",
+                   $"Train Ticket",
+                   pdf);
 
-
-             
 
             }   
             return Ok(reservationId);
