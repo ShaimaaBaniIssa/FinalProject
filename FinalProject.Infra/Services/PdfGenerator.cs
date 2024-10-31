@@ -51,7 +51,7 @@ namespace FinalProject.Infra.Services
 
                      column.Item().Row(row =>
                      {
-                         row.RelativeItem().Text(invoice.Fname);
+                         row.RelativeItem().Text(invoice.Fullname);
                          row.RelativeItem().Text(invoice.Stationname).AlignRight();
                      });
 
@@ -77,7 +77,7 @@ namespace FinalProject.Infra.Services
                      {
 
                          innerColumn.Item().Text("Total Price:").FontSize(14).SemiBold().AlignRight().FontColor(Colors.Black);
-                         innerColumn.Item().Text($"{invoice.Totalprice?.ToString()} JOD").FontSize(16).Bold().AlignRight().FontColor(Colors.Red.Medium);
+                         innerColumn.Item().Text($"{invoice.Price?.ToString()} JOD").FontSize(16).Bold().AlignRight().FontColor(Colors.Red.Medium);
                      });
                  });
 

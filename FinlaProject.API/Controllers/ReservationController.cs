@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 using System.IO;
+using System.IO.Compression;
+using System.IO.Pipes;
 
 namespace FinalProject.API.Controllers
 {
@@ -50,7 +52,7 @@ namespace FinalProject.API.Controllers
         {
             return _reservationService.GetReservationById(id);
         }
-       
+
         [HttpPost]
         [Route("CreateReservation")]
         public IActionResult CreateReservation([FromBody] CreateReservationDto createReservationDto
@@ -66,7 +68,7 @@ namespace FinalProject.API.Controllers
 
 
             // payment 
-            if(!_bankCardService.Pay(createReservationDto.bankcard, price))
+            if (!_bankCardService.Pay(createReservationDto.bankcard, price))
             {
                 return BadRequest("Invalid Card");
 
@@ -99,16 +101,55 @@ namespace FinalProject.API.Controllers
             // generate pdf
             foreach (var invoice in invoices)
             {
-                var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+                //var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
 
-                // send it to the user
-                _emailSender.SendEmail(customer.Email, "Booking Invoice",
-                   $"Train Ticket",
-                   pdf);
-            }
-            return Ok();
+                //// send it to the user
+                //_emailSender.SendEmail(customer.Email, "Booking Invoice",
+                //   $"Train Ticket",
+                //   pdf);
 
+
+             
+
+            }   
+            return Ok(reservationId);
         }
+        [HttpGet]
+        [Route("GetInvoices/{reservationId}/{customerId}")]
+
+        public IActionResult GetInvoices(int reservationId,int customerId)
+        {
+            var customer = _customerService.GetCustomerById(customerId);
+
+            var invoices = _reservationService.GetInvoice(reservationId);
+
+            var zipStream = new MemoryStream();
+            using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
+            {
+                // generate pdf
+                foreach (var invoice in invoices)
+                {
+                    var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
+
+                    // send it to the user
+                    _emailSender.SendEmail(customer.Email, "Booking Invoice",
+                       $"Train Ticket",
+                       pdf);
+
+                    var pdfEntry = archive.CreateEntry($"{invoice.Fullname}_Invoice.pdf", CompressionLevel.Fastest);
+                    using (var entryStream = pdfEntry.Open())
+                    {
+                        entryStream.Write(pdf, 0, pdf.Length);
+                    }
+
+                }
+            }
+            zipStream.Position = 0;
+
+            // Return the zip as a downloadable file
+            return File(zipStream, "application/zip", "Invoices.zip");
+        }
+
         [HttpPut]
 
         [Route("UpdateReservation")]
