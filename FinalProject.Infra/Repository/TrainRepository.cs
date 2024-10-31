@@ -64,7 +64,7 @@ namespace FinalProject.Infra.Repository
         public void  DeleteTrain(int id)
         {
             var p = new DynamicParameters();
-            p.Add("Id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_TrainId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = _dbContext.Connection.Execute("Train_Package.DeleteTrain", p, commandType: CommandType.StoredProcedure);
             
 
