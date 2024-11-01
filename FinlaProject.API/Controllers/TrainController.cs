@@ -3,6 +3,7 @@ using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace FinalProject.API.Controllers
 {
@@ -32,28 +33,50 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("CreateTrain")]
-        public void CreateTrain(Train train)
+        public IActionResult CreateTrain(Train train)
         {
-
-            _trainServices.CreateTrain(train);
+            try
+            {
+                _trainServices.CreateTrain(train);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("error occured while creating the train");
+            }
 
         }
 
 
         [HttpPut]
         [Route("UpdateTrain")]
-        public void UpdateTrain(Train train)
+        public IActionResult UpdateTrain(Train train)
         {
-            _trainServices.UpdateTrain(train);
+            try
+            {
+                _trainServices.UpdateTrain(train);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("cannot update this train");
+            }
 
         }
 
         [HttpDelete]
         [Route("DeleteTrain/{id}")]
-        public void DeleteTrain(int id)
+        public IActionResult DeleteTrain(int id)
         {
-            _trainServices.DeleteTrain(id);
-
+            try
+            {
+                _trainServices.DeleteTrain(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("cannot delete this train");
+            }
         }
     }
 }
