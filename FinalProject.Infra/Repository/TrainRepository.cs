@@ -34,9 +34,9 @@ namespace FinalProject.Infra.Repository
         {
             bool availabilityValue = train.Availability ?? false;
             var p = new DynamicParameters();
-            p.Add("T_Name", train.Trainname, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("Ava", availabilityValue ? 1 : 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("Seats",train.Numofseats , dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_TrainName", train.Trainname, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Availability", availabilityValue ? 1 : 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_NumOfSeats", train.Numofseats , dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
 
@@ -49,10 +49,10 @@ namespace FinalProject.Infra.Repository
             bool availabilityValue = train.Availability ?? false;
 
             var p = new DynamicParameters();
-            p.Add("T_Id", train.Trainid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("T_Name", train.Trainname, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("Ava", availabilityValue ? 1 : 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("Seats", train.Numofseats, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_TrainId", train.Trainid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_TrainName", train.Trainname, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_Availability", availabilityValue ? 1 : 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_NumOfSeats", train.Numofseats, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
 
