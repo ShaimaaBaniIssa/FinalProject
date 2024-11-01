@@ -117,6 +117,13 @@ namespace FinalProject.Infra.Repository
             _dbContext.Connection.Execute("Seat_Package.RemoveSeatFromTripSchedule", p, commandType: CommandType.StoredProcedure);
 
         }
+        public List<Seat> GetSeatByTrainId(int trainid)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_trainid", trainid, DbType.Int32, ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<Seat>("Seat_Package.GetSeatByTrainId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
 
     }
 }

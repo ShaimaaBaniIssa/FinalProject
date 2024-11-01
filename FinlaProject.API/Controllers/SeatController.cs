@@ -59,5 +59,12 @@ namespace FinalProject.API.Controllers
             return _seatServices.GetTripScheduleSeats(tripScheduleId);
 
         }
+        [HttpGet]
+        [Route("GetSeatByTrainId/{trainid}")]
+        public List<Seat> GetTripsByStationId(int trainid)
+        {
+            return _seatServices.GetSeatByTrainId(trainid);
+        }
+
     }
 }
