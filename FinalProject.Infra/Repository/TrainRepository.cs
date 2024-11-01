@@ -25,7 +25,7 @@ namespace FinalProject.Infra.Repository
         }
         public Train GetTrainById(int id) {
             var p = new DynamicParameters();
-            p.Add("Id", id, dbType: DbType.Int32, direction:ParameterDirection.Input);
+            p.Add("p_TrainId", id, dbType: DbType.Int32, direction:ParameterDirection.Input);
             var result=_dbContext.Connection.Query<Train>("Train_Package.GetTrainById", p,commandType: CommandType.StoredProcedure);
             return result.SingleOrDefault();
 
