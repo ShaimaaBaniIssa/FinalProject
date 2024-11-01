@@ -1,7 +1,9 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Services;
+using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace FinalProject.API.Controllers
 {
@@ -31,25 +33,49 @@ namespace FinalProject.API.Controllers
 
         [HttpPost]
         [Route("CreateSeat")]
-        public void CreateSeat(Seat seat)
+        public IActionResult CreateSeat(Seat seat)
         {
-            _seatServices.CreateSeat(seat);
+            try
+            {
+                _seatServices.CreateSeat(seat);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("error occured while creating the seat");
+            }
         }
 
 
         [HttpPut]
         [Route("UpdateSeat")]
-        public void UpdateSeat(Seat seat)
+        public IActionResult UpdateSeat(Seat seat)
         {
-            _seatServices.UpdateSeat(seat);
+            try
+            {
+                _seatServices.UpdateSeat(seat);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("cannot update this seat");
+            }
 
         }
 
         [HttpDelete]
         [Route("DeleteSeat/{id}")]
-        public void DeleteSeat(int id)
+        public IActionResult DeleteSeat(int id)
         {
-            _seatServices.DeleteSeat(id);
+            try
+            {
+                _seatServices.DeleteSeat(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("cannot delete this seat");
+            }
         }
 
         [HttpGet]
