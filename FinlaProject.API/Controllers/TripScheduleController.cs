@@ -83,26 +83,45 @@ namespace FinalProject.API.Controllers
         public bool CheckTripScheduleAvailability(int tripId, DateTime tripScheduleDate)
         {
 
+            // Get the string representation of the day of the week for the given date
             var dateName = tripScheduleDate.DayOfWeek.ToString();
             var trip = _tripService.GetTripById(tripId);
             bool availableDay = false;
-            // check day
-            if (trip.Saturday ?? false && dateName.Equals(DayOfWeek.Saturday))
-                availableDay = true;
-            else if (trip.Sunday ?? false && dateName.Equals(DayOfWeek.Sunday))
-                availableDay = true;
-            else if (trip.Monday ?? false && dateName.Equals(DayOfWeek.Monday))
-                availableDay = true;
-            else if (trip.Tuesday ?? false && dateName.Equals(DayOfWeek.Tuesday))
-                availableDay = true;
-            else if (trip.Wednesday ?? false && dateName.Equals(DayOfWeek.Wednesday))
-                availableDay = true;
-            else if (trip.Thursday ?? false && dateName.Equals(DayOfWeek.Thursday))
-                availableDay = true;
-            else if (trip.Friday ?? false && dateName.Equals(DayOfWeek.Friday.ToString()))
-                availableDay = true;
 
+            // Check each day of the week
+            //using StringComparison.OrdinalIgnoreCase will help avoid issues with case sensitivity.
+            if (trip.Sunday.HasValue && trip.Sunday.Value && dateName.Equals(DayOfWeek.Sunday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+            else if (trip.Saturday.HasValue && trip.Saturday.Value && dateName.Equals(DayOfWeek.Saturday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+            else if (trip.Monday.HasValue && trip.Monday.Value && dateName.Equals(DayOfWeek.Monday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+            else if (trip.Tuesday.HasValue && trip.Tuesday.Value && dateName.Equals(DayOfWeek.Tuesday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+            else if (trip.Wednesday.HasValue && trip.Wednesday.Value && dateName.Equals(DayOfWeek.Wednesday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+            else if (trip.Thursday.HasValue && trip.Thursday.Value && dateName.Equals(DayOfWeek.Thursday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+            else if (trip.Friday.HasValue && trip.Friday.Value && dateName.Equals(DayOfWeek.Friday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                availableDay = true;
+            }
+
+          
             return availableDay;
+
         }
         [HttpGet]
         [Route("GetAvailableSeats/{tripScheduleId}")]
