@@ -58,7 +58,7 @@ namespace FinalProject.Infra.Services
                 var claims = new List<Claim>
              {
              new Claim("name", result.Username),
-             new Claim("role", result.Roleid.ToString()),
+             new Claim("roleid", result.Roleid.ToString()),
              new Claim("customerid", result.Customerid.ToString())
 
              };

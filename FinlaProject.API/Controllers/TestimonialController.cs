@@ -1,6 +1,7 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TestimonialController : ControllerBase
     {
 
@@ -18,6 +20,7 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public List<TestimonialDTO> GetAllTestimonials()
         {
             return _testimonialServices.GetAllTestimonials();
@@ -26,6 +29,8 @@ namespace FinalProject.API.Controllers
 
         [HttpGet]
         [Route("GetTestimonialById/{id}")]
+        [CheckClaims("roleid", "21")]
+
         public TestimonialDTO GetTestimonialById(int id)
         {
             return _testimonialServices.GetTestimonialById(id);
@@ -34,6 +39,7 @@ namespace FinalProject.API.Controllers
 
         [HttpPost]
         [Route("CreateTestimonial")]
+        [CheckClaims("roleid", "1")]
         public void CreateTestimonial(Testimonial testimonial)
         {
 
@@ -42,15 +48,17 @@ namespace FinalProject.API.Controllers
 
         [HttpPut]
         [Route("UpdateTestimonial")]
+        [CheckClaims("roleid", "21")]
         public void UpdateTestimonial(Testimonial testimonial)
         {
-
             _testimonialServices.UpdateTestimonial(testimonial);
         }
 
 
         [HttpDelete]
         [Route("DeleteTestimonial/{id}")]
+        [CheckClaims("roleid", "21")]
+
         public void DeleteTestimonial(int id)
         {
             _testimonialServices.DeleteTestimonial(id);

@@ -2,6 +2,7 @@
 using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using FinalProject.Infra.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,8 @@ namespace FinalProject.API.Controllers
             _loginService = loginService;
         }
         [HttpGet]
+        [CheckClaims("roleid", "21")]
+        [Authorize]
         public List<Login> GetAllLogins()
         {
             return _loginService.GetAllLogins();
@@ -36,12 +39,16 @@ namespace FinalProject.API.Controllers
         [HttpPut]
 
         [Route("UpdateLogin")]
+        [CheckClaims("roleid", "21")]
+        [Authorize]
         public void UpdateLogin(Login login)
         {
             _loginService.UpdateLogin(login);
         }
         [HttpDelete]
         [Route("DeleteLogin/{id}")]
+        [CheckClaims("roleid", "21")]
+        [Authorize]
         public void DeleteLogin(int id)
         {
             _loginService.DeleteLogin(id);
@@ -64,6 +71,8 @@ namespace FinalProject.API.Controllers
         }
         [HttpGet]
         [Route("CountUser")]
+        [CheckClaims("roleid", "21")]
+        [Authorize]
         public int CountUser()
         {
             return _loginService.CountUser();

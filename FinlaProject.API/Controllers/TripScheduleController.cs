@@ -1,6 +1,7 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,8 @@ namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class TripScheduleController : ControllerBase
     {
         private readonly ITripScheduleService _tripScheduleService;
@@ -25,6 +28,7 @@ namespace FinalProject.API.Controllers
             return _tripScheduleService.GetAllTripSchedules();
         }
         [HttpGet]
+        [AllowAnonymous]
         [Route("GetTripScheduleById/{id}")]
         public Tripschedule GetTripScheduleById(int id)
         {
@@ -32,6 +36,7 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("CreateTripSchedule")]
+        [CheckClaims("roleid", "21")]
         public IActionResult CreateTripSchedule(Tripschedule tripSchedule)
         {
 
@@ -61,25 +66,29 @@ namespace FinalProject.API.Controllers
         }
         [HttpPut]
         [Route("UpdateTripSchedule")]
+        [CheckClaims("roleid", "21")]
         public void UpdateTripSchedule(Tripschedule tripSchedule)
         {
             _tripScheduleService.UpdateTripSchedule(tripSchedule);
         }
         [HttpDelete]
         [Route("DeleteTripSchedule/{id}")]
+        [CheckClaims("roleid", "21")]
         public void DeleteTripSchedule(int id)
         {
             _tripScheduleService.DeleteTripSchedule(id);
         }
         [HttpGet]
         [Route("SearchTrip")]
+        [CheckClaims("roleid", "21")]
         public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
-        { 
+        {
 
             return _tripScheduleService.SearchTrip(startDate, endDate);
         }
         [HttpGet]
         [Route("CheckTripScheduleAvailability/{tripId}/{tripScheduleDate}")]
+        [CheckClaims("roleid", "21")]
         public bool CheckTripScheduleAvailability(int tripId, DateTime tripScheduleDate)
         {
 
@@ -119,21 +128,24 @@ namespace FinalProject.API.Controllers
                 availableDay = true;
             }
 
-          
+
             return availableDay;
 
         }
         [HttpGet]
         [Route("GetAvailableSeats/{tripScheduleId}")]
+        [AllowAnonymous]
         public List<Seat> GetAvailableSeats(int tripScheduleId)
         {
-            
+
             var result = _seatServices.GetTripScheduleSeats(tripScheduleId);
             return result.ToList();
-           
+
         }
         [HttpGet]
         [Route("GetTripScheduleByTripId/{id}")]
+        [AllowAnonymous]
+
         public List<Tripschedule> GetTripScheduleByTripId(int id)
         {
             return _tripScheduleService.GetTripScheduleByTripId(id);

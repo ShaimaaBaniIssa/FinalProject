@@ -1,6 +1,7 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Repository;
 using FinalProject.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,6 +10,9 @@ namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+    [CheckClaims("roleid", "21")]
+
     public class TrainController : ControllerBase
     {
         private readonly ITrainServices _trainServices;
