@@ -37,7 +37,7 @@ namespace FinalProject.Infra.Services
         {
             _tripScheduleRepository.UpdateTripSchedule(tripSchedule);
         }
-        public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
+        public List<SearchTripDTO> SearchTrip(DateTime? startDate = null, DateTime? endDate = null)
         {
             return _tripScheduleRepository.SearchTrip(startDate, endDate);
         }

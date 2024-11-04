@@ -65,15 +65,35 @@ namespace FinalProject.Infra.Repository
 
             _dbContext.Connection.Execute("TripSchedule_Package.DeleteTripSchedule", p, commandType: CommandType.StoredProcedure);
         }
-        public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
+        public List<SearchTripDTO> SearchTrip(DateTime? startDate = null, DateTime? endDate = null)
         {
             var p = new DynamicParameters();
-            p.Add("p_StartDate", startDate, DbType.DateTime, ParameterDirection.Input);
-            p.Add("p_EndDate", endDate, DbType.DateTime, ParameterDirection.Input);
 
-            var res = _dbContext.Connection.Query<SearchTripDTO>("Report.SearchTripScheduleByDateRange", p, commandType: CommandType.StoredProcedure);
+           
+            if (startDate.HasValue)
+            {
+                p.Add("p_StartDate", startDate, DbType.DateTime, ParameterDirection.Input);
+            }
+            else
+            {
+                p.Add("p_StartDate", null, DbType.DateTime, ParameterDirection.Input);
+            }
+
+           
+            if (endDate.HasValue)
+            {
+                p.Add("p_EndDate", endDate, DbType.DateTime, ParameterDirection.Input);
+            }
+            else
+            {
+                p.Add("p_EndDate", null, DbType.DateTime, ParameterDirection.Input);
+            }
+
+            var res = _dbContext.Connection.Query<SearchTripDTO>(
+                "Report.SearchTripScheduleByDateRange", p, commandType: CommandType.StoredProcedure);
             return res.ToList();
         }
+
         public List<Tripschedule> CheckTripScheduleAvailability(int tripId, DateTime date)
         {
             var p = new DynamicParameters();
