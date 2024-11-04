@@ -12,9 +12,12 @@ namespace FinalProject.API.Controllers
     public class HomePageController : ControllerBase
     {
         private readonly IHomePageServices _homePageServices;
-        public HomePageController(IHomePageServices homePageServices)
+        private readonly IConfiguration _configuration;
+
+        public HomePageController(IHomePageServices homePageServices, IConfiguration configuration)
         {
             _homePageServices = homePageServices;
+            _configuration = configuration;
         }
         [HttpGet]
         [AllowAnonymous]
@@ -37,6 +40,23 @@ namespace FinalProject.API.Controllers
         public void UpdateHomePage(Homepage homepage)
         {
             _homePageServices.UpdateHomePage(homepage);
+        }
+        [Route("UploadImage")]
+        [HttpPost]
+        [CheckClaims("roleid", "21")]
+        public Homepage UploadImage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var imageFolderPath = _configuration["ImageFolderPath"];
+            var fullPath = Path.Combine(imageFolderPath, fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Homepage homepage = new Homepage();
+            homepage.Logoimage = fileName;
+            return homepage;
         }
     }
 }
