@@ -3,17 +3,20 @@ using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using FinalProject.Core.Utility;
 using FinalProject.Infra.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 using System.IO;
 using System.IO.Compression;
 using System.IO.Pipes;
+using System.Security.Claims;
 
 namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReservationController : ControllerBase
     {
         private readonly IReservationService _reservationService;
@@ -42,12 +45,16 @@ namespace FinalProject.API.Controllers
             _seatServices = seatServices;
         }
         [HttpGet]
+        [CheckClaims("roleid", "21")]
+
         public List<Reservation> GetAllReservations()
         {
             return _reservationService.GetAllReservations();
         }
         [HttpGet]
         [Route("GetReservationById/{id}")]
+        [CheckClaims("roleid", "21")]
+
         public Reservation GetReservationById(int id)
         {
             return _reservationService.GetReservationById(id);
@@ -55,6 +62,7 @@ namespace FinalProject.API.Controllers
 
         [HttpPost]
         [Route("CreateReservation")]
+        [CheckClaims("roleid", "1")]
         public IActionResult CreateReservation([FromBody] CreateReservationDto createReservationDto
             )
         {
@@ -113,6 +121,7 @@ namespace FinalProject.API.Controllers
             return Ok(reservationId);
         }
         [HttpGet]
+        [CheckClaims("roleid", "1")]
         [Route("GetInvoices/{reservationId}/{customerId}")]
 
         public IActionResult GetInvoices(int reservationId,int customerId)
@@ -149,6 +158,7 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpPut]
+        [CheckClaims("roleid", "21")]
 
         [Route("UpdateReservation")]
         public void UpdateReservation(Reservation reservation)
@@ -157,27 +167,35 @@ namespace FinalProject.API.Controllers
         }
         [HttpDelete]
         [Route("DeleteReservation/{id}")]
+        [CheckClaims("roleid", "21")]
+
         public void DeleteReservation(int id)
         {
             _reservationService.DeleteReservation(id);
         }
+        //[HttpGet]
+        //[Route("GetReservationsWithCustomer")]
+
+        //public async Task<List<Reservation>> GetReservationsWithCustomer()
+        //{
+        //    return await _reservationService.GetReservationsWithCustomer();
+        //}
         [HttpGet]
         [Route("GetReservationsWithCustomer")]
-        public async Task<List<Reservation>> GetReservationsWithCustomer()
+        [CheckClaims("roleid", "1")]
+        public ActionResult<List<Reservation>> GetReservationByCustId()
         {
-            return await _reservationService.GetReservationsWithCustomer();
+            var custId = User.FindFirstValue("customerid");
+            if (custId == null)
+            {
+                return BadRequest();
+            }
+            return Ok(_reservationService.GetReservationByCustId(int.Parse(custId)));
         }
-        [HttpGet]
-        [Route("GetReservationsWithCustomer/{custId}")]
-        public List<Reservation> GetReservationByCustId(int custId)
-        {
-            return _reservationService.GetReservationByCustId(custId);
-        }
-
-
 
         [HttpGet]
         [Route("MonthlyAnnualReports")]
+        [CheckClaims("roleid", "21")]
         public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year)
         {
 

@@ -1,6 +1,7 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.Services;
 using FinalProject.Infra.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,6 +10,7 @@ namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SeatController : ControllerBase
     {
         private readonly ISeatServices _seatServices;
@@ -18,6 +20,7 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpGet]
+        [CheckClaims("roleid", "21")]
         public List<Seat> GetAllSeats()
         {
             return _seatServices.GetAllSeats();
@@ -25,6 +28,8 @@ namespace FinalProject.API.Controllers
 
         [HttpGet]
         [Route("GetSeatById/{id}")]
+        [CheckClaims("roleid", "21")]
+
         public Seat GetSeatById(int id)
         {
             return _seatServices.GetSeatById(id);
@@ -33,6 +38,8 @@ namespace FinalProject.API.Controllers
 
         [HttpPost]
         [Route("CreateSeat")]
+        [CheckClaims("roleid", "21")]
+
         public IActionResult CreateSeat(Seat seat)
         {
             try
@@ -49,6 +56,8 @@ namespace FinalProject.API.Controllers
 
         [HttpPut]
         [Route("UpdateSeat")]
+        [CheckClaims("roleid", "21")]
+
         public IActionResult UpdateSeat(Seat seat)
         {
             try
@@ -65,6 +74,8 @@ namespace FinalProject.API.Controllers
 
         [HttpDelete]
         [Route("DeleteSeat/{id}")]
+        [CheckClaims("roleid", "21")]
+
         public IActionResult DeleteSeat(int id)
         {
             try
@@ -79,15 +90,9 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetTripScheduleSeats/{tripScheduleId}")]
-        public List<Seat> GetTrainSeats(int tripScheduleId)
-        {
-            return _seatServices.GetTripScheduleSeats(tripScheduleId);
-
-        }
-        [HttpGet]
         [Route("GetSeatByTrainId/{trainid}")]
-        public List<Seat> GetTripsByStationId(int trainid)
+        [AllowAnonymous]
+        public List<Seat> GetSeatByTrainId(int trainid)
         {
             return _seatServices.GetSeatByTrainId(trainid);
         }

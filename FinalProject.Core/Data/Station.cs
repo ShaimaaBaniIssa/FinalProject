@@ -22,6 +22,6 @@ namespace FinalProject.Core.Data
         public virtual ICollection<Testimonial> Testimonials { get; set; }
         public virtual ICollection<Trip> Trips { get; set; }
         [NotMapped]
-        public int AverageRating { get; set; }
+        public decimal? AverageRating { get; set; }
     }
 }

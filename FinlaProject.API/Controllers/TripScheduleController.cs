@@ -1,6 +1,7 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,8 @@ namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class TripScheduleController : ControllerBase
     {
         private readonly ITripScheduleService _tripScheduleService;
@@ -25,6 +28,7 @@ namespace FinalProject.API.Controllers
             return _tripScheduleService.GetAllTripSchedules();
         }
         [HttpGet]
+        [AllowAnonymous]
         [Route("GetTripScheduleById/{id}")]
         public Tripschedule GetTripScheduleById(int id)
         {
@@ -32,6 +36,7 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("CreateTripSchedule")]
+        [CheckClaims("roleid", "21")]
         public IActionResult CreateTripSchedule(Tripschedule tripSchedule)
         {
 
@@ -61,59 +66,86 @@ namespace FinalProject.API.Controllers
         }
         [HttpPut]
         [Route("UpdateTripSchedule")]
+        [CheckClaims("roleid", "21")]
         public void UpdateTripSchedule(Tripschedule tripSchedule)
         {
             _tripScheduleService.UpdateTripSchedule(tripSchedule);
         }
         [HttpDelete]
         [Route("DeleteTripSchedule/{id}")]
+        [CheckClaims("roleid", "21")]
         public void DeleteTripSchedule(int id)
         {
             _tripScheduleService.DeleteTripSchedule(id);
         }
         [HttpGet]
         [Route("SearchTrip")]
-        public List<SearchTripDTO> SearchTrip(DateTime? startDate = null, DateTime? endDate = null) { 
+        [CheckClaims("roleid", "21")]
+        public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
+        {
 
             return _tripScheduleService.SearchTrip(startDate, endDate);
         }
         [HttpGet]
         [Route("CheckTripScheduleAvailability/{tripId}/{tripScheduleDate}")]
+        [CheckClaims("roleid", "21")]
         public bool CheckTripScheduleAvailability(int tripId, DateTime tripScheduleDate)
         {
 
+            // Get the string representation of the day of the week for the given date
             var dateName = tripScheduleDate.DayOfWeek.ToString();
             var trip = _tripService.GetTripById(tripId);
             bool availableDay = false;
-            // check day
-            if (trip.Saturday ?? false && dateName.Equals(DayOfWeek.Saturday))
+
+            // Check each day of the week
+            //using StringComparison.OrdinalIgnoreCase will help avoid issues with case sensitivity.
+            if (trip.Sunday.HasValue && trip.Sunday.Value && dateName.Equals(DayOfWeek.Sunday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
-            else if (trip.Sunday ?? false && dateName.Equals(DayOfWeek.Sunday))
+            }
+            else if (trip.Saturday.HasValue && trip.Saturday.Value && dateName.Equals(DayOfWeek.Saturday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
-            else if (trip.Monday ?? false && dateName.Equals(DayOfWeek.Monday))
+            }
+            else if (trip.Monday.HasValue && trip.Monday.Value && dateName.Equals(DayOfWeek.Monday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
-            else if (trip.Tuesday ?? false && dateName.Equals(DayOfWeek.Tuesday))
+            }
+            else if (trip.Tuesday.HasValue && trip.Tuesday.Value && dateName.Equals(DayOfWeek.Tuesday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
-            else if (trip.Wednesday ?? false && dateName.Equals(DayOfWeek.Wednesday))
+            }
+            else if (trip.Wednesday.HasValue && trip.Wednesday.Value && dateName.Equals(DayOfWeek.Wednesday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
-            else if (trip.Thursday ?? false && dateName.Equals(DayOfWeek.Thursday))
+            }
+            else if (trip.Thursday.HasValue && trip.Thursday.Value && dateName.Equals(DayOfWeek.Thursday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
-            else if (trip.Friday ?? false && dateName.Equals(DayOfWeek.Friday.ToString()))
+            }
+            else if (trip.Friday.HasValue && trip.Friday.Value && dateName.Equals(DayOfWeek.Friday.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
                 availableDay = true;
+            }
+
 
             return availableDay;
+
         }
         [HttpGet]
         [Route("GetAvailableSeats/{tripScheduleId}")]
+        [AllowAnonymous]
         public List<Seat> GetAvailableSeats(int tripScheduleId)
         {
-            
+
             var result = _seatServices.GetTripScheduleSeats(tripScheduleId);
             return result.ToList();
-           
+
         }
         [HttpGet]
         [Route("GetTripScheduleByTripId/{id}")]
+        [AllowAnonymous]
+
         public List<Tripschedule> GetTripScheduleByTripId(int id)
         {
             return _tripScheduleService.GetTripScheduleByTripId(id);

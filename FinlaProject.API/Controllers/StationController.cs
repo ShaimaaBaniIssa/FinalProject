@@ -2,6 +2,7 @@
 using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
 using FinalProject.Infra.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,8 @@ namespace FinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class StationController : ControllerBase
     {
         private readonly IStationService _stationService;
@@ -20,18 +23,23 @@ namespace FinalProject.API.Controllers
             _configuration = configuration;
         }
         [HttpGet]
+        [AllowAnonymous]
         public List<Station> GetAllStations()
         {
             return _stationService.GetAllStations();
         }
         [HttpGet]
         [Route("GetStationById/{id}")]
+        [AllowAnonymous]
+
         public Station GetStationById(int id)
         {
             return _stationService.GetStationById(id);
         }
         [HttpPost]
         [Route("CreateStation")]
+        [CheckClaims("roleid", "21")]
+
         public ActionResult CreateStation(Station station)
         {
             try
@@ -49,6 +57,7 @@ namespace FinalProject.API.Controllers
         }
         [HttpPut]
         [Route("UpdateStation")]
+        [CheckClaims("roleid", "21")]
         public ActionResult UpdateStation(Station station)
         {
             try
@@ -66,6 +75,7 @@ namespace FinalProject.API.Controllers
         }
         [HttpDelete]
         [Route("DeleteStation/{id}")]
+        [CheckClaims("roleid", "21")]
         public ActionResult DeleteStation(int id)
         {
             try
@@ -82,6 +92,7 @@ namespace FinalProject.API.Controllers
         }
         [Route("UploadImage")]
         [HttpPost]
+        [CheckClaims("roleid", "21")]
         public Station UploadImage()
         {
             var file = Request.Form.Files[0];
@@ -98,6 +109,7 @@ namespace FinalProject.API.Controllers
         }
         [HttpGet]
         [Route("GetStationsWithTrips")]
+        [AllowAnonymous]
         public Task<List<Station>> GetStationsWithTrips()
         {
             return _stationService.GetStationsWithTrips();
@@ -106,12 +118,14 @@ namespace FinalProject.API.Controllers
 
         [HttpGet]
         [Route("SearchStation/{staionName}")]
+        [AllowAnonymous]
         public List<SearchStationDTO> SearchStation(string staionName)
         {
             return _stationService.SearchStation(staionName);
         }
         [HttpGet]
         [Route("StationCount")]
+        [CheckClaims("roleid", "21")]
         public int StationCount()
         {
             return _stationService.StationCount();
