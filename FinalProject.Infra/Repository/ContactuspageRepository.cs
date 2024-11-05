@@ -35,6 +35,10 @@ namespace FinalProject.Infra.Repository
             p.Add("p_Icon", contactuspage.Icon, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_IconText1", contactuspage.Icontext1, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_IconText2", contactuspage.Icontext2, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_email", contactuspage.Email, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            p.Add("p_phon", contactuspage.Phonenumber, dbType: DbType.String, direction: ParameterDirection.Input);
+
             p.Add("p_ContactFormImage", contactuspage.Contactformimage, dbType: DbType.String, direction: ParameterDirection.Input);
             _dbContext.Connection.Execute("ContactusPage_Package.CreateContactusPage", p, commandType: CommandType.StoredProcedure);
 
@@ -51,6 +55,10 @@ namespace FinalProject.Infra.Repository
             p.Add("p_IconText1", contactuspage.Icontext1, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_IconText2", contactuspage.Icontext2, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_ContactFormImage", contactuspage.Contactformimage, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            p.Add("p_email", contactuspage.Email, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            p.Add("p_phon", contactuspage.Phonenumber, dbType: DbType.String, direction: ParameterDirection.Input);
             _dbContext.Connection.Execute("ContactusPage_Package.UpdateContactusPage", p, commandType: CommandType.StoredProcedure);
 
         }
