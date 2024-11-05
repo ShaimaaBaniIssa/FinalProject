@@ -78,10 +78,11 @@ namespace FinalProject.API.Controllers
         {
             _tripScheduleService.DeleteTripSchedule(id);
         }
+       
         [HttpGet]
         [Route("SearchTrip")]
         [CheckClaims("roleid", "21")]
-        public List<SearchTripDTO> SearchTrip(DateTime startDate, DateTime endDate)
+        public List<SearchTripDTO> SearchTrip(DateTime? startDate = null, DateTime? endDate = null)
         {
 
             return _tripScheduleService.SearchTrip(startDate, endDate);
