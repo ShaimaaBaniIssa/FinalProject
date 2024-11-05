@@ -121,7 +121,7 @@ namespace FinalProject.Infra.Repository
             
             return result.ToList();
         }
-        public List<Reservation> GetReservationByCustId(int custId)
+        public List<ReservationDto> GetReservationByCustId(int custId)
 
         {
 
@@ -129,7 +129,7 @@ namespace FinalProject.Infra.Repository
 
             p.Add("p_customerId", custId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Query<Reservation>("Reservation_Package.GetReservationByCustId", p, commandType: CommandType.StoredProcedure);
+            var result = _dbContext.Connection.Query<ReservationDto>("Reservation_Package.GetReservationByCustId", p, commandType: CommandType.StoredProcedure);
 
             return result.ToList() ;    
 

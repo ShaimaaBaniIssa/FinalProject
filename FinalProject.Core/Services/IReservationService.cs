@@ -17,7 +17,7 @@ namespace FinalProject.Core.Services
         void UpdateReservation(Reservation reservation);
         void DeleteReservation(int id);
         Task<List<Reservation>> GetReservationsWithCustomer();
-        List<Reservation> GetReservationByCustId(int custId);
+        List<ReservationDto> GetReservationByCustId(int custId);
         List<Invoice> GetInvoice(int reservationId);
         List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year);
 

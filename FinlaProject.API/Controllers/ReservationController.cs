@@ -181,9 +181,9 @@ namespace FinalProject.API.Controllers
         //    return await _reservationService.GetReservationsWithCustomer();
         //}
         [HttpGet]
-        [Route("GetReservationsWithCustomer")]
+        [Route("GetReservationByCustId")]
         [CheckClaims("roleid", "1")]
-        public ActionResult<List<Reservation>> GetReservationByCustId()
+        public ActionResult<List<ReservationDto>> GetReservationByCustId()
         {
             var custId = User.FindFirstValue("customerid");
             if (custId == null)
@@ -200,6 +200,23 @@ namespace FinalProject.API.Controllers
         {
 
             return _reservationService.MonthlyAnnualReports(month, year);
+        }
+        [HttpGet]
+        [Route("GetReservationTickets/{reservationId}")]
+        [CheckClaims("roleid", "1")]
+        public ActionResult<List<Invoice>> GetReservationTickets(int reservationId)
+        {
+            try
+            {
+            return Ok(_reservationService.GetInvoice(reservationId));
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+
+            }
         }
 
     }

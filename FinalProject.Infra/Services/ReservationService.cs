@@ -46,7 +46,7 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetReservationsWithCustomer();
         }
-        public List<Reservation> GetReservationByCustId(int custId)
+        public List<ReservationDto> GetReservationByCustId(int custId)
         {
             return _reservationRepository.GetReservationByCustId(custId);
         }
