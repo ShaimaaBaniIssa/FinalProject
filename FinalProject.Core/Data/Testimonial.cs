@@ -13,5 +13,7 @@ namespace FinalProject.Core.Data
 
         public virtual Customer? Customer { get; set; }
         public virtual Station? Station { get; set; }
+        public bool? IsApprove { get; set; }
+
     }
 }

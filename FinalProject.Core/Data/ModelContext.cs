@@ -314,7 +314,9 @@ namespace FinalProject.Core.Data
                     .HasForeignKey(d => d.Customerid)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_CUSTOMER_TESTIMONIAL");
-
+                entity.Property(e => e.IsApprove)
+                   .HasPrecision(1)
+                   .HasColumnName("ISAPPROVE");
                 entity.HasOne(d => d.Station)
                     .WithMany(p => p.Testimonials)
                     .HasForeignKey(d => d.Stationid)
