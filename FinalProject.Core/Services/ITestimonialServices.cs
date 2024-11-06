@@ -11,6 +11,9 @@ namespace FinalProject.Core.Services
     public interface ITestimonialServices
     {
         List<TestimonialDTO> GetAllTestimonials();
+        List<TestimonialDTO> GetApprovedTestimonials();
+        List<TestimonialDTO> GetUnApprovedTestimonials();
+
         TestimonialDTO GetTestimonialById(int id);
         void CreateTestimonial(Testimonial testimonial);
         void UpdateTestimonial(Testimonial testimonial);

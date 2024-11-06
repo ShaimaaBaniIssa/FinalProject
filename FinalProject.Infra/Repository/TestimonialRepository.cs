@@ -30,6 +30,16 @@ namespace FinalProject.Infra.Repository
             IEnumerable<TestimonialDTO> result = _dbContext.Connection.Query<TestimonialDTO>("Testimonial_Package.GetAllTestimonials", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<TestimonialDTO> GetApprovedTestimonials()
+        {
+            IEnumerable<TestimonialDTO> result = _dbContext.Connection.Query<TestimonialDTO>("Testimonial_Package.GetApprovedTestimonials", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<TestimonialDTO> GetUnApprovedTestimonials()
+        {
+            IEnumerable<TestimonialDTO> result = _dbContext.Connection.Query<TestimonialDTO>("Testimonial_Package.GetUnApprovedTestimonials", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
         public TestimonialDTO GetTestimonialById(int id)
         {
             var p = new DynamicParameters();
@@ -46,6 +56,7 @@ namespace FinalProject.Infra.Repository
             p.Add("Station_Id", testimonial.Stationid , dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("T_Rating", testimonial.Rating, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("T_Comment", testimonial.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("T_approved", testimonial.IsApprove, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
             _dbContext.Connection.Execute("Testimonial_Package.CreateTestimonial", p, commandType: CommandType.StoredProcedure);
@@ -61,6 +72,7 @@ namespace FinalProject.Infra.Repository
             p.Add("Station_Id", testimonial.Stationid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("T_Rating", testimonial.Rating, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("T_Comment", testimonial.Commenttext, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("T_approved", testimonial.IsApprove, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
 

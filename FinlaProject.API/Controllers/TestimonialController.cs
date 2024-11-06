@@ -26,6 +26,23 @@ namespace FinalProject.API.Controllers
             return _testimonialServices.GetAllTestimonials();
         }
 
+        [HttpGet]
+        [Route("GetApprovedTestimonials")]
+        [AllowAnonymous]
+        public List<TestimonialDTO> GetApprovedTestimonials()
+        {
+            return _testimonialServices.GetApprovedTestimonials();
+
+        }
+
+        [HttpGet]
+        [Route("GetUnApprovedTestimonials")]
+        [CheckClaims("roleid", "21")]
+        public List<TestimonialDTO> GetUnApprovedTestimonials()
+        {
+            return _testimonialServices.GetUnApprovedTestimonials();
+
+        }
 
         [HttpGet]
         [Route("GetTestimonialById/{id}")]

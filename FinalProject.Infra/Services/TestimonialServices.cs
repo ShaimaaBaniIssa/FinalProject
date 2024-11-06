@@ -23,6 +23,18 @@ namespace FinalProject.Infra.Services
         {
            return _testimonialRepository.GetAllTestimonials();
         }
+
+        public List<TestimonialDTO> GetApprovedTestimonials()
+        {
+            return _testimonialRepository.GetApprovedTestimonials();
+            
+        }
+        public List<TestimonialDTO> GetUnApprovedTestimonials()
+        {
+            return _testimonialRepository.GetUnApprovedTestimonials();
+
+        }
+
         public TestimonialDTO GetTestimonialById(int id)
         {
             return _testimonialRepository.GetTestimonialById(id);
