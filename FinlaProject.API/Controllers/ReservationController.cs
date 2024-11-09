@@ -218,6 +218,14 @@ namespace FinalProject.API.Controllers
 
             }
         }
+        [HttpGet]
+        [Route("GetMonthlyReservationCount")]
+        [CheckClaims("roleid", "21")]
+        public List<MonthlyreportDTO> GetMonthlyReservationCount()
+        {
+            return _reservationService.GetMonthlyReservationCount();
+        }
+
 
     }
 

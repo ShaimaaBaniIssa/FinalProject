@@ -20,6 +20,7 @@ namespace FinalProject.Core.Repository
         List<ReservationDto> GetReservationByCustId(int custId);
         List<Invoice> GetInvoice(int reservationId);
         List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year);
+        List<MonthlyreportDTO> GetMonthlyReservationCount();
 
 
     }

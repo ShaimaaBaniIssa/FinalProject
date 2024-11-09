@@ -156,6 +156,11 @@ namespace FinalProject.Infra.Repository
             var result = _dbContext.Connection.Query<MonthlyAnnualDTO>("Report.MonthlyAnnualReports", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<MonthlyreportDTO> GetMonthlyReservationCount()
+        {
+            var result = _dbContext.Connection.Query<MonthlyreportDTO>("Report.GetMonthlyReservationCount",  commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }
 

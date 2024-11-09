@@ -87,7 +87,9 @@ builder.Services.AddAuthentication(opt => {
         ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretKey@FinalProject123456"))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperSecretKey@FinalProject123456")),
+        ClockSkew = TimeSpan.Zero
+
     };
 });
 var app = builder.Build();

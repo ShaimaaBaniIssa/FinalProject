@@ -21,6 +21,7 @@ namespace FinalProject.Core.Services
         List<Invoice> GetInvoice(int reservationId);
         List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year);
 
+        List<MonthlyreportDTO> GetMonthlyReservationCount();
 
     }
 }

@@ -59,6 +59,11 @@ namespace FinalProject.Core.Services
 
           return _reservationRepository.MonthlyAnnualReports(month, year);
         }
+        public List<MonthlyreportDTO> GetMonthlyReservationCount()
+        {
+            return _reservationRepository.GetMonthlyReservationCount();
+        }
+         
 
     }
 }

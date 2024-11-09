@@ -65,7 +65,7 @@ namespace FinalProject.Infra.Services
 
                 var tokeOptions = new JwtSecurityToken(
                                 claims: claims,
-                                expires: DateTime.Now.AddHours(24),
+                                expires: DateTime.UtcNow.AddMinutes(30),
                                 signingCredentials: signinCredentials
                         );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
