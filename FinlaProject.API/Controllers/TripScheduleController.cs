@@ -55,8 +55,13 @@ namespace FinalProject.API.Controllers
 
 
             if (arrivaltime.CompareTo(departuretime) != 1)
-                return BadRequest("Arrival time must be greater than Departure time"); ;
+                return BadRequest("Arrival time must be greater than Departure time");
 
+            if (tripSchedule.Tdate.Value.Date.CompareTo(DateTime.Now.Date) < 0)
+            {
+                return BadRequest("Trip Schedule Date must be greater than or equal today date");
+
+            }
             // check first if the train is avaialble at the selected date
             bool isAvailable = _tripScheduleService.CheckTrainAvailabilty((int)tripSchedule.Trainid, tripSchedule.Tdate.Value, tripSchedule.Departuretime);
             if (!isAvailable)
