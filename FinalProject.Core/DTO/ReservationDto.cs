@@ -13,7 +13,7 @@ namespace FinalProject.Core.DTO
         public string? Departuretime { get; set; }
         public string? Arrivaltime { get; set; }
         public decimal Reservationid { get; set; }
-
+        public int NumUsers { get; set; }
 
     }
 }

@@ -54,8 +54,9 @@ namespace FinalProject.Core.Services
         {
             return _reservationRepository.GetInvoice(reservationId);
         }
-        public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year)
+        public List<ReservationDto> MonthlyAnnualReports(int? month, int year)
         {
+ 
 
           return _reservationRepository.MonthlyAnnualReports(month, year);
         }

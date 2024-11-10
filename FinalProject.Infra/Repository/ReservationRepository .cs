@@ -144,18 +144,24 @@ namespace FinalProject.Infra.Repository
             var result = _dbContext.Connection.Query<Invoice>("Reservation_Package.GetReservationDetails", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
-        public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month , int year)
+        public List<ReservationDto> MonthlyAnnualReports(int? month, int year)
         {
+            
             if (month == 0)
             {
                 month = null;
             }
+
+            
             var p = new DynamicParameters();
-            p.Add("p_month", month,dbType:DbType.Int32,direction:ParameterDirection.Input);
+            p.Add("p_month", month, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("p_year", year, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = _dbContext.Connection.Query<MonthlyAnnualDTO>("Report.MonthlyAnnualReports", p, commandType: CommandType.StoredProcedure);
+
+           
+            var result = _dbContext.Connection.Query<ReservationDto>("Report.MonthlyAnnualReports", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+
         public List<MonthlyreportDTO> GetMonthlyReservationCount()
         {
             var result = _dbContext.Connection.Query<MonthlyreportDTO>("Report.GetMonthlyReservationCount",  commandType: CommandType.StoredProcedure);

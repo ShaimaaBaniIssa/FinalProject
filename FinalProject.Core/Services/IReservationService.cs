@@ -19,8 +19,7 @@ namespace FinalProject.Core.Services
         Task<List<Reservation>> GetReservationsWithCustomer();
         List<ReservationDto> GetReservationByCustId(int custId);
         List<Invoice> GetInvoice(int reservationId);
-        List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year);
-
+        List<ReservationDto> MonthlyAnnualReports(int? month, int year);
         List<MonthlyreportDTO> GetMonthlyReservationCount();
 
     }

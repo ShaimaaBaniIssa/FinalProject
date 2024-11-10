@@ -196,7 +196,7 @@ namespace FinalProject.API.Controllers
         [HttpGet]
         [Route("MonthlyAnnualReports")]
         [CheckClaims("roleid", "21")]
-        public List<MonthlyAnnualDTO> MonthlyAnnualReports(int? month, int year)
+        public List<ReservationDto> MonthlyAnnualReports(int? month, int year)
         {
 
             return _reservationService.MonthlyAnnualReports(month, year);
