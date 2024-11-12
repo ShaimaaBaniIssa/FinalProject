@@ -1,10 +1,13 @@
 ﻿using FinalProject.Core.Data;
 using FinalProject.Core.DTO;
 using FinalProject.Core.Services;
+using FinalProject.Infra.Repository;
 using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Oracle.ManagedDataAccess.Client;
+using System.Diagnostics;
 
 namespace FinalProject.API.Controllers
 {
@@ -58,15 +61,23 @@ namespace FinalProject.API.Controllers
         [Route("login")]
         public IActionResult Auth(Login login)
         {
-            var token = _loginService.Auth(login);
-            if (token == null)
+            try
             {
-                return Unauthorized();
+                var token = _loginService.Auth(login);
+                if (token == null)
+                {
+                    return Unauthorized();
+                }
+                else
+                {
+                    return Ok(token);
+                }
             }
-            else
+            catch (Exception e)
             {
-                return Ok(token);
+                return BadRequest("invaild username/password");
             }
+          
 
         }
         [HttpGet]
@@ -79,9 +90,25 @@ namespace FinalProject.API.Controllers
         }
         [HttpPost]
         [Route("Registration")]
-        public void Registration(Registration regInfo)
+        public IActionResult Registration(Registration regInfo)
         {
-            _loginService.Registration(regInfo);
+            try
+            {
+                // Call your registration code here, e.g., insert into database
+                _loginService.Registration(regInfo);
+                return Ok();
+            }
+            catch (OracleException ex) when (ex.Number == 1) // ORA-00001
+            {
+                
+                return BadRequest("User name is already taken !");
+               
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                return BadRequest($"An error occurred: {ex.Message}");
+            }
 
         }
     }

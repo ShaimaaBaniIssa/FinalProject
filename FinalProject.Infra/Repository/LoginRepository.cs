@@ -99,6 +99,10 @@ namespace FinalProject.Infra.Repository
             //name from PROCEDURE(User_NAME,Pass)
             p.Add("User_NAME", login.Username, dbType: DbType.String, direction: ParameterDirection.Input);
             var res = _dbContext.Connection.Query<Login>("Login_Package.User_Login", p, commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+            if (res == null)
+            {
+                return null;
+            }
             var hashPass = _passwordHasher.Verify(res.Password, login.Password);
             if (hashPass == false)
             {
