@@ -122,7 +122,8 @@ namespace FinalProject.Core.Data
                     .HasColumnName("LONGITUDE");
 
                 entity.Property(e => e.Phonenumber)
-                    .HasColumnType("NUMBER(38)")
+                     .HasMaxLength(20)
+                    .IsUnicode(false)
                     .HasColumnName("PHONENUMBER");
                 entity.Property(e => e.Address)
                 .HasMaxLength(35)
@@ -231,10 +232,7 @@ namespace FinalProject.Core.Data
                     .ValueGeneratedOnAdd()
                     .HasColumnName("SEATID");
 
-                entity.Property(e => e.Availability)
-                    .HasPrecision(1)
-                    .HasColumnName("AVAILABILITY");
-
+              
                 entity.Property(e => e.Seatnumber)
                     .HasMaxLength(5)
                     .IsUnicode(false)
@@ -380,9 +378,7 @@ namespace FinalProject.Core.Data
                     .ValueGeneratedOnAdd()
                     .HasColumnName("TRAINID");
 
-                entity.Property(e => e.Availability)
-                    .HasPrecision(1)
-                    .HasColumnName("AVAILABILITY");
+               
 
                 entity.Property(e => e.Numofseats)
                     .HasColumnType("NUMBER(38)")

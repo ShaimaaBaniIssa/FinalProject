@@ -12,7 +12,6 @@ namespace FinalProject.Core.Data
 
         public decimal Seatid { get; set; }
         public string? Seatnumber { get; set; }
-        public bool? Availability { get; set; }
         public decimal? Trainid { get; set; }
 
         public virtual Train? Train { get; set; }

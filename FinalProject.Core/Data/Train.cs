@@ -13,7 +13,6 @@ namespace FinalProject.Core.Data
 
         public decimal Trainid { get; set; }
         public string? Trainname { get; set; }
-        public bool? Availability { get; set; }
         public decimal? Numofseats { get; set; }
 
         public virtual ICollection<Seat> Seats { get; set; }
