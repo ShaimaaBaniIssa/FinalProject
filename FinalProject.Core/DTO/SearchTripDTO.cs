@@ -12,8 +12,10 @@ namespace FinalProject.Core.DTO
         public int TripScheduleId { get; set; }
         public string? DepartureTime { get; set; }
         public string? ArrivalTime { get; set; }
-        public int TripId { get; set; }
-        public int TrainId { get; set; }
+        public string? Destaddress { get; set; }
+
+        public string? Trainname { get; set; }
+
         public DateTime? TDate { get; set; }
 
     }
