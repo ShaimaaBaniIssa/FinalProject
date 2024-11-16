@@ -53,7 +53,7 @@ namespace FinalProject.Infra.Repository
             p.Add("p_PointImg3", aboutuspage.Point_Img_3, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("p_Img3", aboutuspage.Img_3, dbType: DbType.String, direction: ParameterDirection.Input);
 
-            _dbContext.Connection.Execute("Aboutuspage_Package.CreateAboutUsPage", p, commandType: CommandType.StoredProcedure);
+            _dbContext.Connection.Execute("Aboutuspage_Package.UpdateAboutUsPage", p, commandType: CommandType.StoredProcedure);
 
         }
 
