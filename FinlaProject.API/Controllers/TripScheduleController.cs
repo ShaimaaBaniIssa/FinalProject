@@ -156,5 +156,12 @@ namespace FinalProject.API.Controllers
         {
             return _tripScheduleService.GetTripScheduleByTripId(id);
         }
+        [HttpGet]
+        [Route("GetTripScheduleDTOByTripId/{id}")]
+        [AllowAnonymous]
+        public List<SearchTripDTO> GetTripScheduleDTOByTripId(int id)
+        {
+            return _tripScheduleService.GetTripScheduleDTOByTripId(id);
+        }
     }
 }

@@ -123,5 +123,12 @@ namespace FinalProject.Infra.Repository
             var result = _dbContext.Connection.Query<Tripschedule>("TripSchedule_Package.GetTripScheduleByTripId", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<SearchTripDTO> GetTripScheduleDTOByTripId(int tripId)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_TripId", tripId, DbType.Int32, ParameterDirection.Input);
+            var result = _dbContext.Connection.Query<SearchTripDTO>("TripSchedule_Package.GetTripScheduleDTOByTripId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

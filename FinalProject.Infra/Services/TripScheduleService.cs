@@ -53,6 +53,10 @@ namespace FinalProject.Infra.Services
         {
             return _tripScheduleRepository.GetTripScheduleByTripId(tripId);
         }
+        public List<SearchTripDTO> GetTripScheduleDTOByTripId(int tripId)
+        {
+            return _tripScheduleRepository.GetTripScheduleDTOByTripId(tripId);
+        }
 
     }
 }
