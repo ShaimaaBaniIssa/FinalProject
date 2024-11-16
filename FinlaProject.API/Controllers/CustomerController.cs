@@ -4,6 +4,7 @@ using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinalProject.API.Controllers
 {
@@ -24,12 +25,15 @@ namespace FinalProject.API.Controllers
             return _customerService.GetAllCustomers();
         }
         [HttpGet]
-        [Route("GetCustomerById/{id}")]
-        //[CheckClaims("roleid", "1")]
-
-        public Customer GetCustomerById(int id)
+        [Route("GetCustomerById")]
+        public ActionResult<Customer>  GetCustomerById()
         {
-            return _customerService.GetCustomerById(id);
+            var custId = User.FindFirstValue("customerid");
+            if (custId == null)
+            {
+                return BadRequest();
+            }
+            return Ok( _customerService.GetCustomerById(int.Parse(custId)));
         }
         [HttpPost]
         [Route("CreateCustomer")]
