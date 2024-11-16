@@ -25,7 +25,7 @@ namespace FinalProject.API.Controllers
         }
         [HttpGet]
         [Route("GetCustomerById/{id}")]
-        [CheckClaims("roleid", "1")]
+        //[CheckClaims("roleid", "1")]
 
         public Customer GetCustomerById(int id)
         {
