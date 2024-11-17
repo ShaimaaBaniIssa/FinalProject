@@ -17,6 +17,9 @@ namespace FinalProject.Core.DTO
         public string? Trainname { get; set; }
 
         public DateTime? TDate { get; set; }
+        public decimal Tripid { get; set; }
+        public decimal Trainid { get; set; }
+
 
     }
 }

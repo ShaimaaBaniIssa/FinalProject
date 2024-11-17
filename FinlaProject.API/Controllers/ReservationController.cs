@@ -121,13 +121,11 @@ namespace FinalProject.API.Controllers
             return Ok(reservationId);
         }
         [HttpGet]
-        [CheckClaims("roleid", "1")]
-        [Route("GetInvoices/{reservationId}/{customerId}")]
+        [Route("GetInvoices/{reservationId}")]
 
-        public IActionResult GetInvoices(int reservationId,int customerId)
+        public IActionResult GetInvoices(int reservationId)
         {
-            var customer = _customerService.GetCustomerById(customerId);
-
+ 
             var invoices = _reservationService.GetInvoice(reservationId);
 
             var zipStream = new MemoryStream();
@@ -138,11 +136,7 @@ namespace FinalProject.API.Controllers
                 {
                     var pdf = _pdfGenerator.GetInvoice(invoice).GeneratePdf();
 
-                    // send it to the user
-                    _emailSender.SendEmail(customer.Email, "Booking Invoice",
-                       $"Train Ticket",
-                       pdf);
-
+                 
                     var pdfEntry = archive.CreateEntry($"{invoice.Fullname}_Invoice.pdf", CompressionLevel.Fastest);
                     using (var entryStream = pdfEntry.Open())
                     {
@@ -173,13 +167,7 @@ namespace FinalProject.API.Controllers
         {
             _reservationService.DeleteReservation(id);
         }
-        //[HttpGet]
-        //[Route("GetReservationsWithCustomer")]
-
-        //public async Task<List<Reservation>> GetReservationsWithCustomer()
-        //{
-        //    return await _reservationService.GetReservationsWithCustomer();
-        //}
+    
         [HttpGet]
         [Route("GetReservationByCustId")]
         [CheckClaims("roleid", "1")]
@@ -205,6 +193,7 @@ namespace FinalProject.API.Controllers
         [HttpGet]
         [Route("GetReservationTickets/{reservationId}")]
         [CheckClaims("roleid", "1")]
+
         public ActionResult<List<Invoice>> GetReservationTickets(int reservationId)
         {
             try

@@ -96,6 +96,23 @@ namespace FinalProject.API.Controllers
         {
             return _seatServices.GetSeatByTrainId(trainid);
         }
+        [HttpDelete]
+        [Route("RemoveReservedSeat/{tripScheduleId}")]
+        [CheckClaims("roleid", "21")]
+
+        public IActionResult RemoveReservedSeat(int tripScheduleId)
+        {
+            try
+            {
+                _seatServices.RemoveReservedSeat(tripScheduleId);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("cannot delete this seat");
+            }
+        }
+
 
     }
 }

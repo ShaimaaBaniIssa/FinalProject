@@ -4,6 +4,7 @@ using FinalProject.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Oracle.ManagedDataAccess.Client;
 
 namespace FinalProject.API.Controllers
 {
@@ -72,18 +73,48 @@ namespace FinalProject.API.Controllers
         [HttpPut]
         [Route("UpdateTripSchedule")]
         [CheckClaims("roleid", "21")]
-        public void UpdateTripSchedule(Tripschedule tripSchedule)
+        public IActionResult UpdateTripSchedule(Tripschedule tripSchedule)
         {
-            _tripScheduleService.UpdateTripSchedule(tripSchedule);
+            try
+            {
+                _tripScheduleService.UpdateTripSchedule(tripSchedule);
+                return Ok();
+            } 
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
         }
         [HttpDelete]
         [Route("DeleteTripSchedule/{id}")]
         [CheckClaims("roleid", "21")]
-        public void DeleteTripSchedule(int id)
+        public IActionResult DeleteTripSchedule(int id)
         {
-            _tripScheduleService.DeleteTripSchedule(id);
+          
+            try
+            {
+                _tripScheduleService.DeleteTripSchedule(id);
+                return Ok();
+            }
+
+            catch (OracleException ex)
+            {
+                // Handle Oracle-specific exceptions
+                if (ex.Number == 2292) // ORA-02292
+                {
+                    return BadRequest("Cannot delete a reserved trip schedule");
+                }
+                return BadRequest();
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
         }
-       
+
         [HttpGet]
         [Route("SearchTrip")]
         [CheckClaims("roleid", "21")]

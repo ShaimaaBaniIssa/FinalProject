@@ -43,9 +43,9 @@ namespace FinalProject.Infra.Services
         {
             _seatRepository.ReserveSeat(seatId, tripScheduleId);
         }
-        public void RemoveReservedSeat(int seatId, int tripScheduleId)
+        public void RemoveReservedSeat( int tripScheduleId)
         {
-            _seatRepository.RemoveReservedSeat(seatId, tripScheduleId);
+            _seatRepository.RemoveReservedSeat(tripScheduleId);
         }
         public List<Seat> GetSeatByTrainId(int trainid)
         {

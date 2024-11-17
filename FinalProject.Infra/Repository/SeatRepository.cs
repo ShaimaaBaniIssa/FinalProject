@@ -85,10 +85,9 @@ namespace FinalProject.Infra.Repository
             _dbContext.Connection.Execute("Seat_Package.AddSeatToTripSchedule", p, commandType: CommandType.StoredProcedure);
 
         }
-        public void RemoveReservedSeat(int seatId, int tripScheduleId)
+        public void RemoveReservedSeat(int tripScheduleId)
         {
             var p = new DynamicParameters();
-            p.Add("p_seat_id", seatId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("p_tripschedule_id", tripScheduleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 
