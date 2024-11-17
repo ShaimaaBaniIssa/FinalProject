@@ -57,13 +57,13 @@ namespace FinalProject.Infra.Services
 
                      column.Item().Row(row =>
                      {
-                         row.RelativeItem().Text($"Reservation Date: {invoice.Reservationdate?.ToString("dd MMMM yyyy")}");
+                         row.RelativeItem().Text($"Reservation Date: {invoice.RDate?.ToString("dd MMMM yyyy")}");
                          row.RelativeItem().Text($"Destination: {invoice.Destaddress}").AlignRight();
                      });
 
                      column.Item().Row(row =>
                      {
-                         row.RelativeItem().Text($"Trip Date: {invoice.RDate?.ToString("dd MMMM yyyy")}");
+                         row.RelativeItem().Text($"Trip Date: {invoice.Reservationdate?.ToString("dd MMMM yyyy")}");
                          row.RelativeItem().Text($"Seat Number: {invoice.Seatnumber}").AlignRight();
 
 
