@@ -4,6 +4,7 @@ using FinalProject.Infra.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace FinalProject.API.Controllers
 {
@@ -35,22 +36,48 @@ namespace FinalProject.API.Controllers
         [HttpPost]
         [Route("CreateTrip")]
         [CheckClaims("roleid", "21")]
-        public void CreateTrip(Trip trip)
+        public IActionResult CreateTrip(Trip trip)
         {
-            _tripService.CreateTrip(trip);
+            try
+            {
+                _tripService.CreateTrip(trip);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("error occured while creating the train");
+            }
+
         }
         [HttpPut]
         [Route("UpdateTrip")]
         [CheckClaims("roleid", "21")]
-        public void UpdateTrip(Trip trip)
+        public IActionResult UpdateTrip(Trip trip)
         {
-            _tripService.UpdateTrip(trip);
+            try
+            {
+                _tripService.UpdateTrip(trip);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("error occured while updating the train");
+            }
         }
         [HttpDelete]
         [Route("DeleteTrip/{id}")]
         [CheckClaims("roleid", "21")]
-        public void DeleteTrip(int id)
+        public IActionResult DeleteTrip(int id)
         {
+            try
+            {
+                _tripService.DeleteTrip(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("error occured while deleting the train");
+            }
             _tripService.DeleteTrip(id);
         }
         [HttpGet]
